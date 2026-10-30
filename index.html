@@ -1,0 +1,1701 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Español en 6 meses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --surface-2: #f3eee6;
+  --text: #1f1b16;
+  --muted: #6b6359;
+  --border: #e6dfd4;
+  --accent: #c8102e;      /* vermelho da bandeira */
+  --accent-2: #f1bf00;    /* amarelo da bandeira */
+  --accent-soft: #fbe7ea;
+  --ok: #2e7d4f;
+  --ok-soft: #e3f3e9;
+  --warn: #b26a00;
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15130f;
+    --surface: #1f1c17;
+    --surface-2: #29251f;
+    --text: #f2ede6;
+    --muted: #a69d90;
+    --border: #3a342c;
+    --accent: #ff4d63;
+    --accent-2: #ffd23f;
+    --accent-soft: #3a1c21;
+    --ok: #5cc98a;
+    --ok-soft: #1c3226;
+    --warn: #f0a640;
+    --shadow: none;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+    --bg: #15130f;
+    --surface: #1f1c17;
+    --surface-2: #29251f;
+    --text: #f2ede6;
+    --muted: #a69d90;
+    --border: #3a342c;
+    --accent: #ff4d63;
+    --accent-2: #ffd23f;
+    --accent-soft: #3a1c21;
+    --ok: #5cc98a;
+    --ok-soft: #1c3226;
+    --warn: #f0a640;
+    --shadow: none;
+    color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  font-size: 16px;
+}
+a { color: var(--accent); }
+
+/* Topo */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding-block: 10px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.brand { font-weight: 700; text-decoration: none; color: var(--text); white-space: nowrap; }
+nav { display: flex; gap: 2px; overflow-x: auto; }
+nav a {
+  padding: 8px 12px; border-radius: 10px; text-decoration: none;
+  color: var(--muted); font-weight: 500; font-size: 15px; white-space: nowrap;
+}
+nav a.active, nav a:hover { background: var(--surface-2); color: var(--text); }
+@media (max-width: 640px) {
+  .brand span { display: none; }
+  nav a { padding: 8px 9px; font-size: 14px; }
+}
+
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+main {
+  max-width: 820px; margin: 0 auto; padding-block: 24px 80px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -.01em; }
+h2 { font-size: 20px; margin: 28px 0 10px; }
+h3 { font-size: 17px; margin: 0 0 6px; }
+.sub { color: var(--muted); margin: 0 0 20px; }
+.small { font-size: 14px; color: var(--muted); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+}
+
+/* Botões */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 16px; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text);
+  font: inherit; font-weight: 600; font-size: 15px; cursor: pointer;
+  text-decoration: none;
+}
+.btn:hover { background: var(--surface-2); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.ok { background: var(--ok); border-color: var(--ok); color: #fff; }
+.btn.ghost { background: transparent; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.rec { background: var(--accent); color: #fff; border-color: var(--accent); animation: pulse 1.2s infinite; }
+@keyframes pulse { 50% { opacity: .65; } }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.row.end { justify-content: flex-end; }
+.spacer { flex: 1; }
+
+/* Hoje: blocos */
+.hero {
+  display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;
+  background: linear-gradient(120deg, var(--accent-soft), var(--surface));
+}
+.ring { width: 84px; height: 84px; }
+.ring circle { fill: none; stroke-width: 9; }
+.ring .bg { stroke: var(--border); }
+.ring .fg { stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset .5s; }
+.ring text { font-weight: 700; font-size: 20px; fill: var(--text); }
+
+.block {
+  display: flex; gap: 14px; align-items: center;
+  text-decoration: none; color: inherit;
+}
+.block .icon {
+  width: 46px; height: 46px; flex: none; border-radius: 12px;
+  display: grid; place-items: center; font-size: 22px;
+  background: var(--surface-2);
+}
+.block.done .icon { background: var(--ok-soft); }
+.block .info { flex: 1; min-width: 0; }
+.block .min { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.block.done h3::after { content: " ✓"; color: var(--ok); }
+a.card.block:hover { border-color: var(--accent); }
+
+/* Timer */
+.timer {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 14px; border-radius: 12px; background: var(--surface-2); margin-bottom: 18px;
+}
+.timer .clock { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 22px; min-width: 70px; }
+
+/* Flashcards */
+.flash { text-align: center; padding: 28px 18px; }
+.flash .pt { font-size: 24px; font-weight: 600; margin: 8px 0 18px; }
+.flash .es { font-size: 26px; font-weight: 700; color: var(--accent); margin: 14px 0 6px; }
+.flash .note { color: var(--muted); font-size: 15px; }
+.tag { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 99px; background: var(--surface-2); color: var(--muted); }
+.tag.new { background: var(--accent-soft); color: var(--accent); }
+.heard { margin: 12px auto 0; max-width: 520px; padding: 10px 14px; border-radius: 10px; background: var(--surface-2); font-size: 15px; }
+.heard .score { font-weight: 700; }
+.w-ok { color: var(--ok); font-weight: 600; }
+.w-miss { color: var(--accent); text-decoration: underline wavy; font-weight: 600; }
+.grades { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 20px; }
+.grades .btn { flex-direction: column; gap: 0; padding: 10px 6px; }
+.grades .btn small { font-weight: 400; color: var(--muted); font-size: 12px; }
+.g1 { border-color: var(--accent) !important; }
+.g4 { border-color: var(--ok) !important; }
+
+/* Shadowing */
+.phrase { display: flex; flex-direction: column; gap: 8px; }
+.phrase .es-big { font-size: 20px; font-weight: 600; }
+.phrase .pt-small { color: var(--muted); font-size: 14px; }
+
+/* Lição */
+.lesson ul { padding-left: 20px; }
+.lesson li { margin-bottom: 6px; }
+.vocab { width: 100%; border-collapse: collapse; font-size: 15px; }
+.vocab td { padding: 7px 8px; border-bottom: 1px solid var(--border); }
+.vocab td:first-child { color: var(--muted); width: 45%; }
+.challenge { border-left: 4px solid var(--accent-2); }
+
+/* Escrita */
+textarea, input[type=text], input[type=date], input[type=number], select {
+  width: 100%; font: inherit; color: var(--text); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 10px; padding: 12px;
+}
+textarea { min-height: 180px; resize: vertical; }
+textarea:focus, input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 6px; }
+
+/* Trilha */
+.phase-title { display: flex; align-items: baseline; gap: 10px; margin: 26px 0 10px; }
+.phase-title span { color: var(--muted); font-size: 14px; }
+.week {
+  display: flex; align-items: center; gap: 12px; cursor: pointer;
+  padding: 12px 14px; margin-bottom: 8px;
+}
+.week .num {
+  width: 34px; height: 34px; border-radius: 50%; flex: none;
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+  background: var(--surface-2); color: var(--muted);
+}
+.week.current { border-color: var(--accent); }
+.week.current .num { background: var(--accent); color: #fff; }
+.week.done .num { background: var(--ok); color: #fff; }
+.week.locked { opacity: .55; }
+
+/* Progresso */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.stat .v { font-size: 28px; font-weight: 700; }
+.stat .l { font-size: 14px; color: var(--muted); }
+.heat { display: grid; grid-template-columns: repeat(14, 1fr); gap: 4px; }
+.heat div { aspect-ratio: 1; border-radius: 4px; background: var(--surface-2); }
+.heat .l1 { background: color-mix(in srgb, var(--ok) 35%, var(--surface-2)); }
+.heat .l2 { background: color-mix(in srgb, var(--ok) 65%, var(--surface-2)); }
+.heat .l3 { background: var(--ok); }
+.bar { height: 10px; border-radius: 99px; background: var(--surface-2); overflow: hidden; }
+.bar > div { height: 100%; background: var(--accent); border-radius: 99px; }
+
+.res { display: block; text-decoration: none; color: inherit; }
+.res:hover { border-color: var(--accent); }
+.res b { color: var(--accent); }
+
+.toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+  background: var(--text); color: var(--bg); padding: 10px 18px; border-radius: 10px;
+  opacity: 0; pointer-events: none; transition: .25s; font-weight: 500; max-width: calc(100% - 32px);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.empty { text-align: center; padding: 40px 18px; }
+.empty .big { font-size: 44px; }
+.warnbox { background: var(--accent-soft); border-color: transparent; }
+
+/* Responder digitando/ditando */
+.typed { display: flex; gap: 8px; max-width: 520px; margin: 0 auto 12px; }
+.typed input { flex: 1; min-width: 0; }
+.flash .typed { margin-top: -4px; }
+.phrase .typed { margin: 4px 0 0; max-width: none; }
+.btn:focus-visible, nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+</style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="#hoje">🇪🇸 <span>Español en 6 meses</span></a>
+    <nav id="nav">
+      <a href="#hoje">Hoje</a>
+      <a href="#trilha">Trilha</a>
+      <a href="#revisar">Cartões</a>
+      <a href="#falar">Falar</a>
+      <a href="#progresso">Progresso</a>
+      <a href="#config">⚙</a>
+    </nav>
+  </header>
+  <main id="app"></main>
+  <div id="toast" class="toast"></div>
+
+  <script>
+// Conteúdo do curso: 24 semanas (6 meses), foco em FALAR sem portunhol,
+// espanhol da Espanha e vocabulário de audiovisual / mercado de trabalho.
+
+const PHASES = [
+  { n: 1, name: "Base sem portunhol", weeks: [1, 4] },
+  { n: 2, name: "Falar do dia a dia e do passado", weeks: [5, 10] },
+  { n: 3, name: "Espanhol do audiovisual", weeks: [11, 16] },
+  { n: 4, name: "Mercado de trabalho", weeks: [17, 22] },
+  { n: 5, name: "Vida na Espanha e simulado", weeks: [23, 24] },
+];
+
+// Recursos de input (ouvir/ler) por fase. Todos gratuitos (alguns com parte paga opcional).
+const INPUT = {
+  1: [
+    { name: "Dreaming Spanish (nível Intermediate)", url: "https://www.dreamingspanish.com", tip: "Filtre por guias da Espanha. Assista sem legenda." },
+    { name: "Hoy Hablamos (podcast)", url: "https://www.hoyhablamos.com", tip: "Podcast diário feito na Espanha, ~10 min por episódio." },
+    { name: "Easy Spanish (YouTube)", url: "https://www.youtube.com/@EasySpanish", tip: "Entrevistas na rua. Prefira os episódios gravados na Espanha." },
+  ],
+  2: [
+    { name: "Dreaming Spanish (Intermediate/Advanced)", url: "https://www.dreamingspanish.com", tip: "Continue somando horas. Meta: 30 min/dia." },
+    { name: "RTVE Play", url: "https://www.rtve.es/play/", tip: "TV pública espanhola, grátis. Séries, documentários e telejornal." },
+    { name: "Hoy Hablamos", url: "https://www.hoyhablamos.com", tip: "Ouça e depois resuma em voz alta o que entendeu (1 min)." },
+  ],
+  3: [
+    { name: "RTVE Play: documentários e séries", url: "https://www.rtve.es/play/", tip: "Repare em como falam de rodaje, montaje, plano..." },
+    { name: "YouTube: tutoriais de edição em espanhol", url: "https://www.youtube.com/results?search_query=tutorial+davinci+resolve+espa%C3%B1ol+edici%C3%B3n", tip: "Aprenda o vocabulário técnico assistindo ao que você já sabe fazer." },
+    { name: "Academia de Cine (YouTube)", url: "https://www.youtube.com/@academiadecine", tip: "Entrevistas e masterclasses do cinema espanhol." },
+  ],
+  4: [
+    { name: "YouTube: entrevista de trabajo en España", url: "https://www.youtube.com/results?search_query=entrevista+de+trabajo+consejos+espa%C3%B1a", tip: "Anote perguntas comuns e responda em voz alta." },
+    { name: "InfoJobs: vagas de editor de vídeo", url: "https://www.infojobs.net/ofertas-trabajo/editor-de-video", tip: "Leia 3 vagas por dia e anote as palavras que se repetem." },
+    { name: "RTVE Play / podcasts nativos", url: "https://www.rtve.es/play/", tip: "Mantenha 20 min de input natural por dia." },
+  ],
+  5: [
+    { name: "YouTube: trámites al llegar a España", url: "https://www.youtube.com/results?search_query=tr%C3%A1mites+llegar+a+espa%C3%B1a+NIE+empadronamiento", tip: "NIE, empadronamiento, aluguel, banco." },
+    { name: "RTVE Play: telejornal", url: "https://www.rtve.es/play/", tip: "Assista o telejornal e resuma 3 notícias em voz alta." },
+    { name: "Hoy Hablamos", url: "https://www.hoyhablamos.com", tip: "Velocidade nativa: tente entender sem pausar." },
+  ],
+};
+
+const WEEKS = [
+  {
+    n: 1, title: "Sons da Espanha",
+    lesson: `
+<p>Seu ouvido já entende. Agora a boca precisa largar os hábitos do português. Os 5 sons que mais denunciam o portunhol:</p>
+<ul>
+<li><b>Z e C (antes de E/I)</b>: na Espanha soam como o <i>th</i> do inglês "think". <i>cero, ciudad, hacer, zapato</i>.</li>
+<li><b>J e G (antes de E/I)</b>: som raspado, de garganta, mais forte que o nosso R de "carro". <i>trabajo, gente, jefe</i>.</li>
+<li><b>LL e Y</b>: soam como um "i" forte, nunca como "lh". <i>lluvia</i> ≈ "iúvia", <i>calle</i> ≈ "caie".</li>
+<li><b>Vogais finais</b>: E final é E mesmo, O final é O mesmo. <i>leche</i> (não "lechi"), <i>trabajo</i> (não "trabaju").</li>
+<li><b>Sem nasal</b>: <i>son, bien, también</i> sem o "ão/ẽ" do português. Feche o N na ponta da língua.</li>
+</ul>
+<p><b>Truque:</b> grave a si mesma lendo os cartões e compare com o áudio. Você vai ouvir os erros na hora.</p>`,
+    speak: "Grave 1 minuto se apresentando: quem você é, de onde é, o que faz. Ouça a gravação e marque cada 'chi' ou 'u' no final de palavra.",
+    write: ["Preséntate: quién eres, de dónde eres y a qué te dedicas (5 frases).", "Describe tu ciudad en 5 frases."],
+  },
+  {
+    n: 2, title: "Falsos amigos",
+    lesson: `
+<p>Palavras iguais com sentido diferente. São a maior fonte de mal-entendido (e de vergonha).</p>
+<ul>
+<li><b>embarazada</b> = grávida (envergonhada = <i>avergonzada</i>)</li>
+<li><b>exquisito</b> = delicioso (esquisito = <i>raro</i>)</li>
+<li><b>oficina</b> = escritório (oficina mecânica = <i>taller</i>)</li>
+<li><b>apellido</b> = sobrenome (apelido = <i>apodo</i>)</li>
+<li><b>pronto</b> = cedo/logo (pronto = <i>listo</i>)</li>
+<li><b>borracha</b> = bêbada (borracha de apagar = <i>goma</i>)</li>
+<li><b>polvo</b> = pó (polvo animal = <i>pulpo</i>)</li>
+<li><b>rato</b> = momento (rato = <i>ratón</i>)</li>
+<li><b>largo</b> = comprido (largo = <i>ancho</i>)</li>
+<li><b>salada</b> = salgada (salada = <i>ensalada</i>)</li>
+</ul>`,
+    speak: "Conte em voz alta uma história curta (pode ser inventada) usando pelo menos 4 falsos amigos corretamente.",
+    write: ["Escribe 6 frases usando: oficina, listo, raro, apellido, pronto, rato.", "Cuenta qué hiciste el fin de semana (5 frases, como puedas)."],
+  },
+  {
+    n: 3, title: "Artigos, gênero e o famoso 'hay'",
+    lesson: `
+<ul>
+<li><b>Não existe "no/na/num"</b>: use <i>en el, en la, en un</i>. "Estou no escritório" = <i>Estoy en la oficina</i>.</li>
+<li><b>a + el = al</b>, <b>de + el = del</b>. Só esses dois se juntam.</li>
+<li><b>"Tem" (existir) = HAY</b>. "Tem um problema" = <i>Hay un problema</i>. Nunca "tiene un problema" nesse sentido.</li>
+<li><b>Gênero trocado</b>: <i>la leche, la sal, la nariz, la sangre, el viaje, el puente, el color, el dolor, el equipo, el árbol</i>.</li>
+<li><b>Palavras em -aje são masculinas</b>: <i>el montaje, el viaje, el mensaje, el paisaje</i>.</li>
+<li><b>LO + adjetivo</b> = "o ... (coisa)": <i>lo mejor, lo importante, lo malo</i>.</li>
+</ul>`,
+    speak: "Descreva em voz alta o lugar onde você trabalha usando 'hay' pelo menos 5 vezes.",
+    write: ["Describe tu espacio de trabajo usando 'hay', 'en el', 'en la' (6 frases).", "¿Qué es lo mejor y lo peor de tu trabajo?"],
+  },
+  {
+    n: 4, title: "Verbos que você usa toda hora",
+    lesson: `
+<ul>
+<li><b>Ditongos</b>: e→ie (<i>quiero, empiezo, pienso</i>) e o→ue (<i>puedo, vuelvo, duermo</i>). Só nas formas yo/tú/él/ellos.</li>
+<li><b>Irregulares no "yo"</b>: <i>hago, salgo, tengo, pongo, digo, vengo, conozco</i>.</li>
+<li><b>"Eu acho que"</b> = <i>creo que / me parece que</i>. (<i>Acho</i> não existe; <i>hallar</i> = encontrar.)</li>
+<li><b>"Ficar"</b> não tem tradução única:
+  <ul><li>permanecer → <i>quedarse</i> (me quedo en casa)</li>
+  <li>emoção → <i>ponerse</i> (me pongo nerviosa)</li>
+  <li>localização → <i>estar</i> (¿dónde está?)</li>
+  <li>resultado → <i>quedar</i> (ha quedado bien)</li></ul></li>
+</ul>`,
+    speak: "Fale 1 minuto sobre sua rotina: a que horas acorda, sai, começa a trabalhar, o que faz.",
+    write: ["Describe tu rutina de un día normal (8 frases).", "¿Qué te pone nerviosa y qué te pone contenta?"],
+  },
+  {
+    n: 5, title: "Gustar e companhia",
+    lesson: `
+<ul>
+<li>Em espanhol, a coisa "agrada" você: <i>Me gusta el cine</i>. Nunca "yo gusto de".</li>
+<li><b>Sem "de"</b>: "Gosto <s>de</s> editar" = <i>Me gusta editar</i>.</li>
+<li><b>Plural</b>: <i>me gusta</i> + singular/verbo, <i>me gustan</i> + plural (<i>me gustan los documentales</i>).</li>
+<li>Para concordar: <i>A mí también</i> / <i>A mí tampoco</i> (não "yo también" depois de gustar).</li>
+<li>Mesma estrutura: <i>me encanta, me interesa, me molesta, me duele, me apetece</i>.</li>
+<li><b>Me apetece</b> = estou a fim de (muito usado na Espanha): <i>¿Te apetece un café?</i></li>
+</ul>`,
+    speak: "Fale do que você gosta e não gosta no seu trabalho e no seu tempo livre (1 min). Use gusta/gustan/encanta/apetece.",
+    write: ["¿Qué te gusta y qué no te gusta de editar vídeos?", "Escribe sobre tus series y películas favoritas."],
+  },
+  {
+    n: 6, title: "Ser e estar (onde o português engana)",
+    lesson: `
+<ul>
+<li><b>Eventos usam SER para lugar/hora</b>: <i>La reunión es en la sala 2</i>. <i>La fiesta es el sábado</i>.</li>
+<li><b>Localização de coisas/pessoas = ESTAR</b>: <i>¿Dónde está la productora?</i> (= onde fica?)</li>
+<li><b>Estado civil</b>: <i>está casado/soltero</i> (o mais comum na Espanha).</li>
+<li><b>Muda o sentido</b>: <i>ser listo</i> (esperto) × <i>estar listo</i> (pronto); <i>ser aburrido</i> (chato) × <i>estar aburrido</i> (entediado); <i>ser rico</i> × <i>estar rico</i> (gostoso).</li>
+<li><b>Profissão</b>: <i>Soy editora</i> (sem artigo).</li>
+</ul>`,
+    speak: "Descreva 3 pessoas que você conhece: como são (ser) e como estão agora (estar).",
+    write: ["Describe a una persona de tu familia: cómo es y cómo está últimamente.", "Escribe la invitación a una reunión: dónde es, cuándo es, qué hay que llevar."],
+  },
+  {
+    n: 7, title: "Passado I: o 'he hecho' da Espanha",
+    lesson: `
+<p>Na Espanha, para algo que aconteceu <b>hoje, esta semana, este mês, este ano</b> ou <b>na vida</b>, usa-se o <b>pretérito perfecto</b>: <i>haber + particípio</i>.</p>
+<ul>
+<li>"Hoje editei três vídeos" = <i>Hoy <b>he editado</b> tres vídeos</i>.</li>
+<li>"Você já viu?" = <i>¿Ya <b>has visto</b>...?</i></li>
+<li>"Ainda não terminei" = <i>Todavía no <b>he terminado</b></i>.</li>
+<li>Conjugação: <i>he, has, ha, hemos, habéis, han</i>.</li>
+<li>Particípios irregulares: <i>hecho, visto, dicho, escrito, puesto, vuelto, abierto, roto</i>.</li>
+<li>O pronome vem <b>antes</b> do haber: <i>Me ha escrito</i>, <i>Lo he enviado</i>.</li>
+</ul>`,
+    speak: "Fale 1 minuto: o que você fez hoje e esta semana. Use só pretérito perfecto.",
+    write: ["¿Qué has hecho hoy? (6 frases con pretérito perfecto)", "¿Qué cosas has hecho alguna vez en tu vida y cuáles no?"],
+  },
+  {
+    n: 8, title: "Passado II: ayer, el año pasado, cuando era...",
+    lesson: `
+<ul>
+<li><b>Indefinido</b> (ontem, ano passado, em 2020): <i>Ayer <b>fui</b>, el año pasado <b>hice</b></i>.</li>
+<li><b>Imperfecto</b> (descrição, hábito no passado, "estava fazendo"): <i>Cuando <b>era</b> pequeña <b>veía</b>...</i>, <i><b>Estaba</b> editando cuando...</i></li>
+<li>Irregulares essenciais: <i>fui, hice, tuve, estuve, dije, puse, pude, quise, vine, supe</i>.</li>
+<li>"Ligar" (telefone) = <i>llamar</i>. "Ligar" (aparelho) = <i>encender</i>.</li>
+<li>Computador = <i>ordenador</i> na Espanha.</li>
+</ul>`,
+    speak: "Conte a história da sua carreira: como começou, onde trabalhou, um projeto marcante (2 min).",
+    write: ["Cuenta cómo empezaste a editar vídeos.", "Cuenta una anécdota de un rodaje o de un proyecto que salió mal."],
+  },
+  {
+    n: 9, title: "Pronomes: te lo, se lo",
+    lesson: `
+<ul>
+<li>"Eu te mando ele" (portunhol) = <i><b>Te lo</b> mando</i>. Os pronomes vêm juntos, antes do verbo.</li>
+<li><b>le + lo = se lo</b>: "Mando para ele" = <i><b>Se lo</b> mando</i>. Nunca "le lo".</li>
+<li>Com infinitivo/imperativo, grudam no final: <i>Voy a enviár<b>telo</b></i>, <i>Mánda<b>me</b>lo</i>.</li>
+<li>Ordem sempre: <b>me/te/se</b> antes de <b>lo/la</b>.</li>
+<li>Na Espanha é normal o "leísmo" com homens: <i>A Juan <b>le</b> vi ayer</i> (aceito).</li>
+</ul>`,
+    speak: "Simule uma conversa com cliente: ele pede arquivos e você responde usando te lo / se lo / mándamelo.",
+    write: ["Escribe un mensaje a un cliente diciendo qué le vas a enviar y cuándo (usa pronombres).", "Transforma: 'Voy a enviar el vídeo a Marta' → con pronombres (y 4 frases más)."],
+  },
+  {
+    n: 10, title: "Preposições traiçoeiras",
+    lesson: `
+<ul>
+<li><b>ir a + infinitivo</b>: <i>Voy <b>a</b> editar</i> (não "voy editar").</li>
+<li><b>"a" com pessoas</b>: <i>Conozco <b>a</b> la directora</i>, <i>Veo <b>a</b> mi madre</i>.</li>
+<li><b>pensar en</b>, <b>soñar con</b>, <b>casarse con</b>, <b>enamorarse de</b>.</li>
+<li><b>Transporte</b>: <i>en autobús, en coche, en tren</i>, mas <i>a pie</i>.</li>
+<li><b>Tempo</b>: "há dois anos que moro" = <i>Llevo dos años viviendo</i> ou <i>Vivo aquí desde hace dos años</i>.</li>
+<li><b>para el viernes</b> (prazo), <b>de lunes a viernes</b>.</li>
+</ul>`,
+    speak: "Fale sobre seus planos para a Espanha usando 'voy a', 'llevo... años', 'pienso en'.",
+    write: ["¿Cuánto tiempo llevas trabajando en audiovisual? Cuéntalo.", "Escribe tus planes para los próximos 6 meses con 'voy a'."],
+  },
+  {
+    n: 11, title: "Vocabulário de edição I",
+    lesson: `
+<table class="vocab">
+<tr><td>edição/montagem</td><td><b>el montaje / la edición</b></td></tr>
+<tr><td>editor(a)</td><td><b>montador(a) / editor(a)</b></td></tr>
+<tr><td>gravação (filmagem)</td><td><b>el rodaje</b> (rodar = filmar)</td></tr>
+<tr><td>plano / tomada / cena</td><td><b>el plano / la toma / la escena</b></td></tr>
+<tr><td>roteiro</td><td><b>el guion</b></td></tr>
+<tr><td>produtora</td><td><b>la productora</b></td></tr>
+<tr><td>correção de cor</td><td><b>el etalonaje / corrección de color</b></td></tr>
+<tr><td>legendas</td><td><b>los subtítulos</b></td></tr>
+<tr><td>GC / letterings</td><td><b>los rótulos / grafismos</b></td></tr>
+<tr><td>trilha sonora</td><td><b>la banda sonora / la música</b></td></tr>
+<tr><td>mixagem</td><td><b>la mezcla de sonido</b></td></tr>
+<tr><td>linha do tempo</td><td><b>la línea de tiempo</b></td></tr>
+<tr><td>exportar/renderizar</td><td><b>exportar / renderizar</b></td></tr>
+<tr><td>vinheta de abertura</td><td><b>la cabecera / la intro</b></td></tr>
+</table>`,
+    speak: "Explique em voz alta, passo a passo, como você edita um vídeo do zero até a entrega (2 min).",
+    write: ["Explica tu flujo de trabajo de edición, paso a paso.", "Describe el último proyecto que has editado."],
+  },
+  {
+    n: 12, title: "Futuro e condicional (prazos e pedidos educados)",
+    lesson: `
+<ul>
+<li><b>Futuro</b>: <i>tendré, haré, podré, estaré</i>. "Entrego sexta" = <i>Lo tendré listo el viernes</i>.</li>
+<li><b>Condicional</b> para pedir com educação: <i>¿Podrías...? Me gustaría... Sería mejor...</i></li>
+<li><b>Mudar de casa/país</b> = <i>mudarse</i>: <i>Me voy a mudar a España</i>. (<i>Cambiar</i> = mudar algo.)</li>
+<li><b>Guion</b> se escreve sem acento.</li>
+</ul>`,
+    speak: "Imagine que um cliente pediu um vídeo: explique o que você vai fazer e quando vai entregar cada etapa.",
+    write: ["Escribe a un cliente con un calendario de entregas (futuro).", "¿Cómo será tu vida en España dentro de un año?"],
+  },
+  {
+    n: 13, title: "Imperativo: dar e receber feedback",
+    lesson: `
+<ul>
+<li>Pedidos diretos (tú): <i>corta, quita, sube, baja, pon, haz, mira</i>.</li>
+<li>Negativo usa subjuntivo: <i>no cortes, no quites, no cambies, no lo hagas</i>.</li>
+<li>Com pronome: <i>quítalo, ponlo, mándamelo / no lo quites</i>.</li>
+<li>"Pode deixar!" = <i>¡Tranquilo/a, yo me encargo!</i></li>
+<li>Feedback educado: <i>Me ha gustado mucho, pero cambiaría...</i> / <i>¿Qué te parece si...?</i></li>
+</ul>`,
+    speak: "Simule um cliente dando 6 alterações no seu vídeo, e depois você confirmando cada uma.",
+    write: ["Escribe una lista de cambios para un vídeo (como si fueras el cliente).", "Responde a esos cambios de forma profesional."],
+  },
+  {
+    n: 14, title: "Subjuntivo I: o erro nº 1 do brasileiro",
+    lesson: `
+<p>O português tem <b>futuro do subjuntivo</b> ("quando eu terminar", "se eu puder"). O espanhol não usa. É o portunhol mais comum de todos.</p>
+<ul>
+<li><b>cuando / en cuanto / hasta que + presente do subjuntivo</b>: "Quando eu terminar" = <i>Cuando <b>termine</b></i>. "Quando você puder" = <i>Cuando <b>puedas</b></i>.</li>
+<li><b>si + presente do indicativo</b>: "Se eu tiver tempo" = <i>Si <b>tengo</b> tiempo</i>.</li>
+<li><b>querer que / esperar que / para que + subjuntivo</b>: <i>Quiero que <b>veas</b>...</i></li>
+<li>Formação: -ar → -e (<i>termine</i>), -er/-ir → -a (<i>tenga, pueda, vea</i>).</li>
+</ul>`,
+    speak: "Fale 10 frases com 'cuando...' sobre sua mudança: cuando llegue, cuando tenga trabajo, cuando encuentre piso...",
+    write: ["Escribe 8 frases: 'Cuando llegue a España, ...'", "Escribe a un compañero lo que quieres que haga (quiero que, necesito que)."],
+  },
+  {
+    n: 15, title: "Subjuntivo II: opinião, desejo e hipótese",
+    lesson: `
+<ul>
+<li><b>No creo que / no pienso que + subjuntivo</b>: <i>No creo que <b>dé</b> tiempo</i>. (Afirmativo usa indicativo: <i>Creo que da tiempo</i>.)</li>
+<li><b>Es importante / necesario / mejor que + subjuntivo</b>.</li>
+<li><b>Ojalá</b> (tomara) e <b>quizás</b> (talvez) + subjuntivo.</li>
+<li><b>Hipótese</b>: <i>Si <b>viviera</b> en Madrid, <b>trabajaría</b>...</i> (imperfeito do subjuntivo + condicional).</li>
+<li><b>Busco algo que + subjuntivo</b>: <i>Busco un trabajo que <b>sea</b> en remoto</i>.</li>
+</ul>`,
+    speak: "Fale sobre o trabalho dos seus sonhos: 'busco un trabajo que...', 'ojalá...', 'si pudiera...'.",
+    write: ["Describe tu trabajo ideal: 'Busco un trabajo que...'", "¿Qué harías si ya vivieras en España?"],
+  },
+  {
+    n: 16, title: "Vocabulário de edição II: orçamento, prazo, arquivos",
+    lesson: `
+<table class="vocab">
+<tr><td>prazo de entrega</td><td><b>el plazo de entrega</b></td></tr>
+<tr><td>orçamento</td><td><b>el presupuesto</b></td></tr>
+<tr><td>nota fiscal</td><td><b>la factura</b> (facturar)</td></tr>
+<tr><td>rodada de alterações</td><td><b>ronda de cambios</b></td></tr>
+<tr><td>material bruto</td><td><b>el material en bruto / los brutos</b></td></tr>
+<tr><td>backup</td><td><b>la copia de seguridad</b></td></tr>
+<tr><td>HD externo</td><td><b>el disco duro externo</b></td></tr>
+<tr><td>pasta / arquivo</td><td><b>la carpeta / el archivo</b></td></tr>
+<tr><td>computador</td><td><b>el ordenador</b></td></tr>
+<tr><td>câmera / lente</td><td><b>la cámara / el objetivo</b></td></tr>
+<tr><td>som direto</td><td><b>el sonido directo</b></td></tr>
+<tr><td>briefing</td><td><b>el briefing</b></td></tr>
+</table>`,
+    speak: "Simule uma ligação: um cliente pede orçamento e você pergunta prazo, duração, número de alterações e formato.",
+    write: ["Escribe un presupuesto sencillo para la edición de un vídeo corporativo.", "Escribe las 6 preguntas que haces siempre a un cliente nuevo."],
+  },
+  {
+    n: 17, title: "Currículo e portfólio",
+    lesson: `
+<ul>
+<li>Na Espanha: <b>currículum (CV)</b> de 1 a 2 páginas. A foto é opcional; o formato moderno costuma ir melhor que o Europass.</li>
+<li>Tenha um <b>reel / videobook</b> curto (1–2 min) e um link de portfólio.</li>
+<li>Onde procurar: <b>InfoJobs, LinkedIn, Malt</b> (freelance), <b>Domestika</b> (comunidade criativa), sites de produtoras.</li>
+<li>Resumo profissional em 3 linhas: quem você é + especialidade + ferramentas + idiomas.</li>
+<li>"Estou especializada em..." = <i>Estoy especializada en...</i></li>
+</ul>`,
+    speak: "Grave seu 'pitch' de 30 segundos: quem você é profissionalmente. Regrave até sair sem travar.",
+    write: ["Escribe tu resumen profesional para el CV (3-4 líneas).", "Describe tus tres trabajos más importantes para el CV."],
+  },
+  {
+    n: 18, title: "E-mails profissionais",
+    lesson: `
+<ul>
+<li>Formal: <b>Estimada Marta:</b> (com dois-pontos). Informal: <b>Hola, Marta:</b></li>
+<li>Abertura: <i>Le escribo para... / Te escribo para...</i></li>
+<li>Anexo: <i>Le adjunto mi currículum / Te paso el enlace</i>.</li>
+<li>Fechamento: <i>Quedo a la espera de su respuesta. Un saludo / Saludos cordiales</i>.</li>
+<li><b>Usted × tú</b>: na Espanha, o "tú" é muito comum até no trabalho. Comece com "usted" num primeiro contato formal e mude se a outra pessoa usar "tú".</li>
+</ul>`,
+    speak: "Leia em voz alta seus e-mails da semana como se estivesse ditando para alguém.",
+    write: ["Escribe un email presentándote a una productora de Madrid o Barcelona.", "Escribe un email de seguimiento: no te han respondido en una semana."],
+  },
+  {
+    n: 19, title: "Entrevista I: falar de você",
+    lesson: `
+<ul>
+<li>Perguntas clássicas: <i>Háblame de ti. ¿Por qué quieres trabajar aquí? ¿Cuáles son tus puntos fuertes y débiles? ¿Por qué te mudas a España?</i></li>
+<li>Estrutura: <b>passado</b> (como começou) → <b>presente</b> (o que faz hoje) → <b>futuro</b> (o que quer).</li>
+<li>Prepare 3 histórias de projetos com: situação, o que você fez, resultado.</li>
+<li>"Lido bem com..." = <i>Llevo bien...</i> / "Me orgulho de" = <i>Estoy orgullosa de</i>.</li>
+</ul>`,
+    speak: "Responda em voz alta (e grave) as 4 perguntas clássicas. Ouça e regrave a pior.",
+    write: ["Responde por escrito: 'Háblame de ti'.", "Responde: '¿Por qué quieres trabajar en España?'"],
+  },
+  {
+    n: 20, title: "Entrevista II: salário e condições",
+    lesson: `
+<ul>
+<li>Salário na Espanha é dito em <b>bruto anual</b>, pago em 12 ou 14 parcelas (<i>pagas</i>).</li>
+<li><b>Jornada completa / media jornada</b>, <b>presencial / híbrido / en remoto</b>.</li>
+<li><b>Autónomo</b> = freelancer registrado (paga cota mensal). <b>Contrato indefinido</b> = CLT sem prazo.</li>
+<li><b>Nómina</b> = holerite. <b>Alta en la Seguridad Social</b> = registro.</li>
+<li>Pergunte com educação: <i>¿Qué banda salarial tenéis para el puesto?</i></li>
+</ul>`,
+    speak: "Simule a parte final da entrevista: você pergunta sobre salário, jornada, equipe e quando começa.",
+    write: ["Escribe 6 preguntas que harías al final de una entrevista.", "Explica la diferencia entre trabajar como autónoma y con contrato."],
+  },
+  {
+    n: 21, title: "Reuniões e chamadas",
+    lesson: `
+<ul>
+<li>Marcar: <i>¿Te viene bien el martes a las diez?</i></li>
+<li>Interromper: <i>Perdona que te interrumpa, pero...</i></li>
+<li>Confirmar: <i>A ver si lo he entendido...</i> / <i>Entonces, quedamos en que...</i></li>
+<li>Não entendeu: <i>Perdona, ¿puedes repetirlo?</i></li>
+<li>Concordar: <i>Vale / De acuerdo / Perfecto</i>.</li>
+</ul>`,
+    speak: "Simule uma reunião de briefing de 3 min: você pergunta, confirma o que entendeu e resume os próximos passos.",
+    write: ["Escribe el resumen de una reunión de briefing (acuerdos y próximos pasos).", "Escribe un mensaje para cambiar la hora de una reunión."],
+  },
+  {
+    n: 22, title: "Espanhol coloquial da Espanha",
+    lesson: `
+<table class="vocab">
+<tr><td>ok, combinado</td><td><b>vale</b></td></tr>
+<tr><td>legal</td><td><b>guay</b></td></tr>
+<tr><td>curtir / gostar muito</td><td><b>molar</b> (me mola)</td></tr>
+<tr><td>trabalho / trabalhar</td><td><b>curro / currar</b></td></tr>
+<tr><td>ficar chocado</td><td><b>flipar</b></td></tr>
+<tr><td>gente boa</td><td><b>majo/maja</b></td></tr>
+<tr><td>vamos lá / bora</td><td><b>venga</b></td></tr>
+<tr><td>dinheiro</td><td><b>pasta</b></td></tr>
+<tr><td>muito</td><td><b>un montón</b></td></tr>
+<tr><td>filme / série</td><td><b>peli / serie</b></td></tr>
+</table>
+<p>Use com colegas, não com o cliente no primeiro contato.</p>`,
+    speak: "Conte para uma 'amiga espanhola' como foi sua semana usando 5 expressões coloquiais.",
+    write: ["Escribe un mensaje de WhatsApp a un compañero de trabajo con expresiones coloquiales.", "Cuenta un plan de fin de semana en tono informal."],
+  },
+  {
+    n: 23, title: "Vida prática na Espanha",
+    lesson: `
+<ul>
+<li><b>Cita previa</b>: agendamento obrigatório para quase tudo.</li>
+<li><b>NIE / TIE</b>: número e cartão de estrangeiro.</li>
+<li><b>Empadronamiento</b>: registro de endereço na prefeitura (<i>ayuntamiento</i>).</li>
+<li><b>Alquiler</b>: aluguel; <b>fianza</b>: caução; <b>piso</b>: apartamento; <b>compartir piso</b>.</li>
+<li><b>Centro de salud</b>: posto de saúde; <b>tarjeta sanitaria</b>.</li>
+</ul>`,
+    speak: "Simule 3 situações: ligar para alugar um apartamento, pedir cita previa, abrir conta no banco.",
+    write: ["Escribe un mensaje a un propietario preguntando por un piso.", "Escribe la lista de trámites que harás al llegar y en qué orden."],
+  },
+  {
+    n: 24, title: "Simulado final",
+    lesson: `
+<p>Semana de revisão e prova real. Sem conteúdo novo.</p>
+<ul>
+<li>Grave uma <b>entrevista completa</b> (10 min) respondendo às perguntas das semanas 19 e 20.</li>
+<li>Escreva um <b>e-mail de candidatura</b> e um <b>resumo profissional</b> finais.</li>
+<li>Faça um <b>simulado B2</b> gratuito (o Instituto Cervantes publica modelos do DELE B2 no site dele).</li>
+<li>Revise todos os cartões atrasados.</li>
+<li>Compare a gravação da semana 1 com a de agora.</li>
+</ul>`,
+    speak: "Grave a entrevista completa. Depois ouça a gravação da semana 1. Essa é a sua evolução.",
+    write: ["Escribe tu email de candidatura definitivo.", "Escribe una carta a ti misma: ¿qué has conseguido en estos 6 meses?"],
+  },
+];
+
+// Cartões de produção: você vê o português e FALA em espanhol.
+// w = semana em que o cartão é liberado.
+const CARDS = [
+  // Semana 1
+  { w: 1, pt: "Eu preciso de um café com leite.", es: "Necesito un café con leche.", note: "'Necesitar' sem 'de'. 'Leche' termina em E, não 'lechi'." },
+  { w: 1, pt: "A cidade é muito bonita.", es: "La ciudad es muy bonita.", note: "C antes de I: som de 'th' (θiudad)." },
+  { w: 1, pt: "Hoje está calor.", es: "Hoy hace calor.", note: "Clima usa 'hacer'. 'El calor' é masculino." },
+  { w: 1, pt: "Eu trabalho com edição de vídeo.", es: "Trabajo en edición de vídeo.", note: "J de garganta. Na Espanha: 'vídeo' com acento no I." },
+  { w: 1, pt: "A chuva não para.", es: "La lluvia no para.", note: "LL soa como 'i' forte: 'la iúvia'." },
+  { w: 1, pt: "O carro é vermelho.", es: "El coche es rojo.", note: "Na Espanha, carro = coche. R inicial vibra." },
+  { w: 1, pt: "Zero, cinco, doze.", es: "Cero, cinco, doce.", note: "Todos com o som de 'th'." },
+  { w: 1, pt: "Eu sou brasileira.", es: "Soy brasileña.", note: "Sem 'yo' (o verbo já diz quem é). Ñ = nh." },
+
+  // Semana 2
+  { w: 2, pt: "Estou com vergonha.", es: "Me da vergüenza.", note: "'Embarazada' = grávida!" },
+  { w: 2, pt: "A comida está deliciosa.", es: "La comida está riquísima.", note: "Também 'exquisita'. 'Esquisito' = 'raro'." },
+  { w: 2, pt: "Amanhã vou ao escritório.", es: "Mañana voy a la oficina.", note: "Oficina = escritório. Oficina mecânica = taller." },
+  { w: 2, pt: "O sobrenome dela é Silva.", es: "Su apellido es Silva.", note: "Apelido = apodo." },
+  { w: 2, pt: "Aquela pessoa é muito esquisita.", es: "Esa persona es muy rara.", note: "Raro = estranho." },
+  { w: 2, pt: "É um vídeo muito engraçado.", es: "Es un vídeo muy gracioso.", note: "Também 'divertido'." },
+  { w: 2, pt: "A loja fecha cedo.", es: "La tienda cierra pronto.", note: "Pronto = cedo/logo. Também 'temprano'." },
+  { w: 2, pt: "O vídeo está pronto.", es: "El vídeo está listo.", note: "Pronto (terminado) = listo." },
+
+  // Semana 3
+  { w: 3, pt: "O leite está frio.", es: "La leche está fría.", note: "Leche é feminino." },
+  { w: 3, pt: "A viagem foi longa.", es: "El viaje fue largo.", note: "-aje é masculino. Largo = comprido." },
+  { w: 3, pt: "Estou no escritório.", es: "Estoy en la oficina.", note: "Não existe 'no/na': en + el/la." },
+  { w: 3, pt: "Vou ao cinema com meus amigos.", es: "Voy al cine con mis amigos.", note: "a + el = al." },
+  { w: 3, pt: "O melhor do projeto é a cor.", es: "Lo mejor del proyecto es el color.", note: "LO + adjetivo. 'El color' masculino. de + el = del." },
+  { w: 3, pt: "Tem um problema no áudio.", es: "Hay un problema en el audio.", note: "'Tem' (existir) = HAY." },
+  { w: 3, pt: "Tem muita gente aqui.", es: "Hay mucha gente aquí.", note: "Hay, nunca 'tiene'." },
+  { w: 3, pt: "A montagem ficou ótima.", es: "El montaje ha quedado genial.", note: "Montaje é masculino. Ficou (resultado) = ha quedado." },
+
+  // Semana 4
+  { w: 4, pt: "Eu acho que é uma boa ideia.", es: "Creo que es una buena idea.", note: "'Acho' → creo / me parece." },
+  { w: 4, pt: "Posso te ajudar?", es: "¿Te puedo ayudar?", note: "o→ue: puedo. Ou: ¿Puedo ayudarte?" },
+  { w: 4, pt: "Quero aprender espanhol.", es: "Quiero aprender español.", note: "e→ie: quiero." },
+  { w: 4, pt: "Eu faço vídeos para empresas.", es: "Hago vídeos para empresas.", note: "Hacer → hago." },
+  { w: 4, pt: "Saio de casa às oito.", es: "Salgo de casa a las ocho.", note: "Salir → salgo. Horas: a las..." },
+  { w: 4, pt: "Fico nervosa quando falo espanhol.", es: "Me pongo nerviosa cuando hablo español.", note: "Ficar + emoção = ponerse." },
+  { w: 4, pt: "Hoje fico em casa.", es: "Hoy me quedo en casa.", note: "Ficar (permanecer) = quedarse." },
+  { w: 4, pt: "Começo a trabalhar às nove.", es: "Empiezo a trabajar a las nueve.", note: "e→ie: empiezo." },
+
+  // Semana 5
+  { w: 5, pt: "Eu gosto de editar vídeos.", es: "Me gusta editar vídeos.", note: "Sem 'de'. Nunca 'yo gusto'." },
+  { w: 5, pt: "Gosto muito das suas ideias.", es: "Me gustan mucho tus ideas.", note: "Plural → gustan." },
+  { w: 5, pt: "(Gosto de cinema.) Eu também.", es: "A mí también.", note: "Depois de gustar: a mí también." },
+  { w: 5, pt: "(Não gosto de futebol.) Eu também não.", es: "A mí tampoco.", note: "Tampoco = também não." },
+  { w: 5, pt: "Você gosta de documentários?", es: "¿Te gustan los documentales?", note: "Documental → documentales." },
+  { w: 5, pt: "Eu adoro trabalhar com cor.", es: "Me encanta trabajar el color.", note: "Encantar funciona como gustar." },
+  { w: 5, pt: "Você está a fim de um café?", es: "¿Te apetece un café?", note: "Apetecer: muito usado na Espanha." },
+  { w: 5, pt: "Estou com dor de cabeça.", es: "Me duele la cabeza.", note: "Doler funciona como gustar." },
+
+  // Semana 6
+  { w: 6, pt: "A reunião é na sala dois.", es: "La reunión es en la sala dos.", note: "Evento + lugar = SER." },
+  { w: 6, pt: "Hoje estou cansada.", es: "Hoy estoy cansada.", note: "Estado = estar." },
+  { w: 6, pt: "Ele é casado.", es: "Está casado.", note: "Estado civil normalmente com estar." },
+  { w: 6, pt: "O projeto está pronto.", es: "El proyecto está listo.", note: "Estar listo = pronto." },
+  { w: 6, pt: "Ele é muito esperto.", es: "Es muy listo.", note: "Ser listo = esperto." },
+  { w: 6, pt: "Onde fica a produtora?", es: "¿Dónde está la productora?", note: "Ficar (localização) = estar." },
+  { w: 6, pt: "Sou editora de vídeo.", es: "Soy editora de vídeo.", note: "Profissão sem artigo." },
+  { w: 6, pt: "Esse filme é chato.", es: "Esta película es aburrida.", note: "Ser aburrido = chato. Estar aburrido = entediado." },
+
+  // Semana 7
+  { w: 7, pt: "Hoje eu editei três vídeos.", es: "Hoy he editado tres vídeos.", note: "Hoje → pretérito perfecto." },
+  { w: 7, pt: "Você já viu esse filme?", es: "¿Ya has visto esta película?", note: "Visto: particípio irregular." },
+  { w: 7, pt: "Ainda não terminei.", es: "Todavía no he terminado.", note: "Ainda = todavía." },
+  { w: 7, pt: "Esta semana trabalhei muito.", es: "Esta semana he trabajado mucho.", note: "Esta semana → perfecto." },
+  { w: 7, pt: "Eu nunca estive na Espanha.", es: "Nunca he estado en España.", note: "Experiência de vida → perfecto." },
+  { w: 7, pt: "O cliente me escreveu.", es: "El cliente me ha escrito.", note: "Pronome antes do haber. Escrito: irregular." },
+  { w: 7, pt: "O que você fez hoje?", es: "¿Qué has hecho hoy?", note: "Hecho: irregular." },
+  { w: 7, pt: "Eu já mandei o arquivo.", es: "Ya he enviado el archivo.", note: "Ya + perfecto." },
+
+  // Semana 8
+  { w: 8, pt: "Ontem eu fui à produtora.", es: "Ayer fui a la productora.", note: "Ayer → indefinido." },
+  { w: 8, pt: "No ano passado fiz um curta.", es: "El año pasado hice un cortometraje.", note: "Hacer → hice. Curta = corto/cortometraje." },
+  { w: 8, pt: "Quando eu era criança, via muitos filmes.", es: "Cuando era pequeña, veía muchas películas.", note: "Hábito no passado → imperfecto." },
+  { w: 8, pt: "Ontem tive um problema com o computador.", es: "Ayer tuve un problema con el ordenador.", note: "Computador = ordenador." },
+  { w: 8, pt: "Ele me disse que gostou.", es: "Me dijo que le gustó.", note: "Decir → dijo." },
+  { w: 8, pt: "Eu estava editando quando ele ligou.", es: "Estaba editando cuando me llamó.", note: "Ligar (telefone) = llamar." },
+  { w: 8, pt: "Trabalhei cinco anos numa agência.", es: "Trabajé cinco años en una agencia.", note: "Numa = en una." },
+  { w: 8, pt: "Não pude ir à reunião.", es: "No pude ir a la reunión.", note: "Poder → pude." },
+
+  // Semana 9
+  { w: 9, pt: "Eu te mando ele amanhã. (o arquivo)", es: "Te lo mando mañana.", note: "Te + lo, antes do verbo." },
+  { w: 9, pt: "Mando para ele hoje. (o vídeo)", es: "Se lo mando hoy.", note: "le + lo = se lo." },
+  { w: 9, pt: "Me manda o link, por favor.", es: "Mándame el enlace, por favor.", note: "Link = enlace. Pronome grudado no imperativo." },
+  { w: 9, pt: "Vou enviar para você agora. (o arquivo)", es: "Voy a enviártelo ahora.", note: "Gruda no infinitivo: enviártelo." },
+  { w: 9, pt: "Você pode me explicar isso?", es: "¿Me lo puedes explicar?", note: "Me + lo." },
+  { w: 9, pt: "Eu a vi ontem na festa.", es: "La vi ayer en la fiesta.", note: "La = ela (objeto)." },
+  { w: 9, pt: "Eu dei o vídeo para ela.", es: "Le di el vídeo.", note: "Le = para ela/ele." },
+  { w: 9, pt: "Não diga isso a ninguém.", es: "No se lo digas a nadie.", note: "Negativo: pronomes antes." },
+
+  // Semana 10
+  { w: 10, pt: "Vou editar o vídeo amanhã.", es: "Voy a editar el vídeo mañana.", note: "Ir A + infinitivo." },
+  { w: 10, pt: "Conheço a diretora.", es: "Conozco a la directora.", note: "'A' antes de pessoa." },
+  { w: 10, pt: "Estou pensando em você.", es: "Estoy pensando en ti.", note: "En ti (não 'en tú')." },
+  { w: 10, pt: "Sonhei com a Espanha.", es: "He soñado con España.", note: "Soñar CON." },
+  { w: 10, pt: "Trabalho de segunda a sexta.", es: "Trabajo de lunes a viernes.", note: "Dias: lunes, martes, miércoles, jueves, viernes." },
+  { w: 10, pt: "Vou de ônibus.", es: "Voy en autobús.", note: "Transporte com EN (mas: a pie)." },
+  { w: 10, pt: "Preciso disso para sexta.", es: "Lo necesito para el viernes.", note: "Prazo = para." },
+  { w: 10, pt: "Moro aqui há dois anos.", es: "Llevo dos años viviendo aquí.", note: "Llevar + tempo + gerúndio." },
+
+  // Semana 11
+  { w: 11, pt: "Sou editora e trabalho com pós-produção.", es: "Soy editora y me dedico a la postproducción.", note: "Dedicarse a = trabalhar com." },
+  { w: 11, pt: "Preciso cortar esse plano.", es: "Tengo que cortar este plano.", note: "Tener que = precisar/ter que." },
+  { w: 11, pt: "A primeira tomada ficou melhor.", es: "La primera toma ha quedado mejor.", note: "Tomada = toma." },
+  { w: 11, pt: "Amanhã faço a correção de cor.", es: "Mañana hago el etalonaje.", note: "Color grading = etalonaje." },
+  { w: 11, pt: "Faltam as legendas.", es: "Faltan los subtítulos.", note: "Legenda = subtítulo." },
+  { w: 11, pt: "A trilha está muito alta.", es: "La música está demasiado alta.", note: "Demasiado = alto demais." },
+  { w: 11, pt: "Já coloquei os letterings.", es: "Ya he puesto los rótulos.", note: "Textos na tela = rótulos." },
+  { w: 11, pt: "As gravações são semana que vem.", es: "El rodaje es la semana que viene.", note: "Gravação (filmagem) = rodaje." },
+
+  // Semana 12
+  { w: 12, pt: "Eu entrego na sexta.", es: "Te lo entrego el viernes.", note: "Ou: Lo tendré listo el viernes." },
+  { w: 12, pt: "Você poderia me mandar o roteiro?", es: "¿Podrías enviarme el guion?", note: "Condicional = educado. Guion sem acento." },
+  { w: 12, pt: "Eu gostaria de trabalhar numa produtora.", es: "Me gustaría trabajar en una productora.", note: "Me gustaría." },
+  { w: 12, pt: "Vou me mudar para a Espanha no ano que vem.", es: "Me voy a mudar a España el año que viene.", note: "Mudarse = mudar de casa." },
+  { w: 12, pt: "Seria melhor usar outra música.", es: "Sería mejor usar otra música.", note: "Condicional." },
+  { w: 12, pt: "Amanhã vou ter mais tempo.", es: "Mañana tendré más tiempo.", note: "Tener → tendré." },
+  { w: 12, pt: "Eu faria de outro jeito.", es: "Yo lo haría de otra manera.", note: "Hacer → haría." },
+  { w: 12, pt: "Terei a primeira versão na segunda.", es: "Tendré la primera versión el lunes.", note: "Dias sem 'na': el lunes." },
+
+  // Semana 13
+  { w: 13, pt: "Corta aqui.", es: "Corta aquí.", note: "Imperativo tú." },
+  { w: 13, pt: "Tira essa música.", es: "Quita esta música.", note: "Tirar = quitar." },
+  { w: 13, pt: "Aumenta o volume da voz.", es: "Sube el volumen de la voz.", note: "Aumentar/abaixar volume = subir/bajar." },
+  { w: 13, pt: "Não mude o começo.", es: "No cambies el principio.", note: "Negativo = subjuntivo." },
+  { w: 13, pt: "Pode deixar, eu resolvo.", es: "Tranquila, yo me encargo.", note: "Encargarse de = cuidar de." },
+  { w: 13, pt: "Gostei muito, mas mudaria o final.", es: "Me ha gustado mucho, pero cambiaría el final.", note: "Feedback educado." },
+  { w: 13, pt: "Você pode encurtar para 30 segundos?", es: "¿Puedes acortarlo a 30 segundos?", note: "Encurtar = acortar." },
+  { w: 13, pt: "Me manda quando estiver pronto.", es: "Mándamelo cuando esté listo.", note: "Cuando + subjuntivo (semana 14)." },
+
+  // Semana 14
+  { w: 14, pt: "Quando eu terminar, te aviso.", es: "Cuando termine, te aviso.", note: "Futuro do subj. → presente do subj." },
+  { w: 14, pt: "Se eu tiver tempo, faço hoje.", es: "Si tengo tiempo, lo hago hoy.", note: "SI + presente do indicativo." },
+  { w: 14, pt: "Quero que você veja a nova versão.", es: "Quiero que veas la nueva versión.", note: "Querer que + subj." },
+  { w: 14, pt: "Espero que o cliente goste.", es: "Espero que al cliente le guste.", note: "Gustar no subj.: guste." },
+  { w: 14, pt: "Te mando para você revisar.", es: "Te lo mando para que lo revises.", note: "Para que + subj." },
+  { w: 14, pt: "Quando você puder, me liga.", es: "Cuando puedas, llámame.", note: "Cuando + subj." },
+  { w: 14, pt: "Assim que receber o material, começo.", es: "En cuanto reciba el material, empiezo.", note: "En cuanto + subj." },
+  { w: 14, pt: "Quando eu chegar na Espanha, vou procurar trabalho.", es: "Cuando llegue a España, buscaré trabajo.", note: "Llegar A (não 'en')." },
+
+  // Semana 15
+  { w: 15, pt: "Não acho que dê tempo.", es: "No creo que dé tiempo.", note: "No creo que + subj." },
+  { w: 15, pt: "É importante que o áudio esteja limpo.", es: "Es importante que el audio esté limpio.", note: "Es importante que + subj." },
+  { w: 15, pt: "Tomara que eu consiga o emprego.", es: "Ojalá consiga el trabajo.", note: "Ojalá + subj." },
+  { w: 15, pt: "Talvez a gente mude o final.", es: "Quizás cambiemos el final.", note: "'A gente' = nosotros." },
+  { w: 15, pt: "Duvido que ele chegue a tempo.", es: "Dudo que llegue a tiempo.", note: "Dudar que + subj." },
+  { w: 15, pt: "Prefiro que a gente fale amanhã.", es: "Prefiero que hablemos mañana.", note: "Preferir que + subj." },
+  { w: 15, pt: "Se eu morasse em Madri, trabalharia numa produtora.", es: "Si viviera en Madrid, trabajaría en una productora.", note: "Hipótese: imperf. subj. + condicional." },
+  { w: 15, pt: "Procuro um trabalho que seja remoto.", es: "Busco un trabajo que sea en remoto.", note: "Algo que + subj." },
+
+  // Semana 16
+  { w: 16, pt: "Qual é o prazo de entrega?", es: "¿Cuál es el plazo de entrega?", note: "Prazo = plazo." },
+  { w: 16, pt: "Vou te mandar um orçamento.", es: "Te voy a enviar un presupuesto.", note: "Orçamento = presupuesto." },
+  { w: 16, pt: "O orçamento inclui duas rodadas de alterações.", es: "El presupuesto incluye dos rondas de cambios.", note: "Alterações = cambios." },
+  { w: 16, pt: "Preciso do material bruto.", es: "Necesito el material en bruto.", note: "Também 'los brutos'." },
+  { w: 16, pt: "Fiz backup no HD externo.", es: "He hecho una copia de seguridad en el disco duro externo.", note: "Backup = copia de seguridad." },
+  { w: 16, pt: "Vou te mandar a nota fiscal.", es: "Te envío la factura.", note: "Nota fiscal = factura." },
+  { w: 16, pt: "O arquivo está na pasta compartilhada.", es: "El archivo está en la carpeta compartida.", note: "Pasta = carpeta." },
+  { w: 16, pt: "Em que formato você precisa do vídeo?", es: "¿En qué formato necesitas el vídeo?", note: "" },
+
+  // Semana 17
+  { w: 17, pt: "Tenho cinco anos de experiência em edição.", es: "Tengo cinco años de experiencia en edición de vídeo.", note: "Adapte com os seus números." },
+  { w: 17, pt: "Trabalho com Premiere, DaVinci Resolve e After Effects.", es: "Trabajo con Premiere, DaVinci Resolve y After Effects.", note: "Pronuncie 'DaVinci' à espanhola." },
+  { w: 17, pt: "Este é o meu portfólio.", es: "Este es mi portfolio.", note: "Também 'mi reel' ou 'videobook'." },
+  { w: 17, pt: "Sou especializada em vídeos para redes sociais.", es: "Estoy especializada en vídeos para redes sociales.", note: "Especializada = estar." },
+  { w: 17, pt: "Tenho disponibilidade imediata.", es: "Tengo disponibilidad inmediata.", note: "" },
+  { w: 17, pt: "Falo português nativo e espanhol avançado.", es: "Hablo portugués nativo y español avanzado.", note: "" },
+  { w: 17, pt: "Estou procurando trabalho como editora.", es: "Estoy buscando trabajo como editora de vídeo.", note: "Procurar = buscar." },
+
+  // Semana 18
+  { w: 18, pt: "Prezada Marta,", es: "Estimada Marta:", note: "Dois-pontos após a saudação." },
+  { w: 18, pt: "Escrevo para me candidatar à vaga de editora.", es: "Le escribo para presentar mi candidatura al puesto de editora.", note: "Vaga = puesto / oferta." },
+  { w: 18, pt: "Segue em anexo meu currículo.", es: "Le adjunto mi currículum.", note: "Adjuntar = anexar." },
+  { w: 18, pt: "Fico no aguardo do seu retorno.", es: "Quedo a la espera de su respuesta.", note: "" },
+  { w: 18, pt: "Atenciosamente,", es: "Un saludo,", note: "Mais formal: Saludos cordiales." },
+  { w: 18, pt: "Desculpe a demora.", es: "Perdona el retraso.", note: "Formal: Disculpe la tardanza." },
+  { w: 18, pt: "Obrigada pelo retorno.", es: "Gracias por tu respuesta.", note: "Retorno = respuesta." },
+
+  // Semana 19
+  { w: 19, pt: "Fale um pouco sobre você.", es: "Háblame un poco de ti.", note: "Pergunta nº 1 de toda entrevista." },
+  { w: 19, pt: "Comecei a editar há oito anos.", es: "Empecé a editar hace ocho años.", note: "Há (tempo atrás) = hace." },
+  { w: 19, pt: "Meu ponto forte é o ritmo da montagem.", es: "Mi punto fuerte es el ritmo del montaje.", note: "" },
+  { w: 19, pt: "Gosto de trabalhar em equipe.", es: "Me gusta trabajar en equipo.", note: "" },
+  { w: 19, pt: "Um projeto do qual me orgulho é...", es: "Un proyecto del que estoy orgullosa es...", note: "" },
+  { w: 19, pt: "Lido bem com prazos apertados.", es: "Llevo bien los plazos ajustados.", note: "Apertado = ajustado." },
+  { w: 19, pt: "Por que você quer trabalhar na Espanha?", es: "¿Por qué quieres trabajar en España?", note: "Prepare a sua resposta!" },
+
+  // Semana 20
+  { w: 20, pt: "Qual é a faixa salarial da vaga?", es: "¿Cuál es la banda salarial del puesto?", note: "" },
+  { w: 20, pt: "O salário é bruto anual?", es: "¿El salario es bruto anual?", note: "Na Espanha se fala em bruto anual." },
+  { w: 20, pt: "O trabalho é presencial, híbrido ou remoto?", es: "¿El puesto es presencial, híbrido o en remoto?", note: "" },
+  { w: 20, pt: "É jornada integral?", es: "¿Es jornada completa?", note: "Meio período = media jornada." },
+  { w: 20, pt: "Trabalho como freelancer.", es: "Trabajo como autónoma.", note: "Autónomo = freelancer registrado." },
+  { w: 20, pt: "Quando eu poderia começar?", es: "¿Cuándo podría empezar?", note: "" },
+  { w: 20, pt: "Como é a equipe?", es: "¿Cómo es el equipo?", note: "Equipo é masculino." },
+
+  // Semana 21
+  { w: 21, pt: "Fica bom para você às dez?", es: "¿Te viene bien a las diez?", note: "Venir bien = ser conveniente." },
+  { w: 21, pt: "Desculpa interromper, mas...", es: "Perdona que te interrumpa, pero...", note: "" },
+  { w: 21, pt: "Deixa eu ver se entendi.", es: "A ver si lo he entendido.", note: "" },
+  { w: 21, pt: "Você pode repetir, por favor?", es: "¿Puedes repetirlo, por favor?", note: "" },
+  { w: 21, pt: "Combinado, então.", es: "Vale, quedamos así.", note: "Quedar = combinar." },
+  { w: 21, pt: "Vou anotar.", es: "Lo apunto.", note: "Anotar = apuntar." },
+  { w: 21, pt: "Podemos marcar outra reunião?", es: "¿Podemos programar otra reunión?", note: "" },
+
+  // Semana 22
+  { w: 22, pt: "Que legal!", es: "¡Qué guay!", note: "Coloquial." },
+  { w: 22, pt: "Ok, combinado.", es: "Vale.", note: "A palavra mais usada da Espanha." },
+  { w: 22, pt: "Eu curto muito esse filme.", es: "Me mola mucho esta peli.", note: "Molar = curtir." },
+  { w: 22, pt: "Estou trabalhando muito.", es: "Estoy currando un montón.", note: "Currar = trabalhar. Un montón = muito." },
+  { w: 22, pt: "Fiquei de boca aberta!", es: "¡He flipado!", note: "Flipar = ficar chocado/impressionado." },
+  { w: 22, pt: "Bora!", es: "¡Venga, vamos!", note: "" },
+  { w: 22, pt: "Ele é muito gente boa.", es: "Es muy majo.", note: "Majo/maja." },
+
+  // Semana 23
+  { w: 23, pt: "Preciso marcar um horário.", es: "Necesito pedir cita previa.", note: "Cita previa: para quase tudo." },
+  { w: 23, pt: "Vim me registrar no endereço.", es: "Vengo a empadronarme.", note: "Empadronamiento." },
+  { w: 23, pt: "Quanto é o aluguel por mês?", es: "¿Cuánto es el alquiler al mes?", note: "Aluguel = alquiler." },
+  { w: 23, pt: "O caução é de dois meses?", es: "¿La fianza es de dos meses?", note: "Caução = fianza." },
+  { w: 23, pt: "Ainda não tenho o NIE.", es: "Todavía no tengo el NIE.", note: "" },
+  { w: 23, pt: "Quero abrir uma conta no banco.", es: "Quiero abrir una cuenta en el banco.", note: "" },
+  { w: 23, pt: "Onde fica o ponto de ônibus?", es: "¿Dónde está la parada del autobús?", note: "Ponto = parada." },
+];
+
+// ID estável: semana + posição dentro da semana (ex: "w3-2").
+(() => {
+  const count = {};
+  CARDS.forEach((c) => {
+    count[c.w] = (count[c.w] || 0) + 1;
+    c.id = "w" + c.w + "-" + count[c.w];
+  });
+})();
+
+</script>
+  <script>
+// Español en 6 meses: app de estudo diário (sem servidor, tudo salvo no navegador).
+
+/* ---------- Estado salvo ---------- */
+const KEY = "espanol6m";
+const DAY = 86400000;
+
+function defaultState() {
+  return {
+    startDate: todayKey(),
+    week: 1,
+    newPerDay: 10,
+    cards: {},          // id -> { due, ivl, ease, reps, lapses }
+    newCount: {},       // data -> nº de cartões novos vistos
+    log: {},            // data -> { blocks: {id: true}, minutes }
+    journal: [],        // { date, week, prompt, text }
+    weeksDone: {},
+  };
+}
+
+let S = load();
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) return Object.assign(defaultState(), JSON.parse(raw));
+  } catch (e) { /* sem acesso ao armazenamento */ }
+  return defaultState();
+}
+function save() {
+  S.savedAt = Date.now();
+  try { localStorage.setItem(KEY, JSON.stringify(S)); }
+  catch (e) { if (!cloud) toast("Não foi possível salvar o progresso neste navegador."); }
+  scheduleCloud();
+}
+
+// Aberto pelo link do Claude (dentro de um quadro): sem microfone direto e sem downloads.
+const EMBED = window.self !== window.top;
+
+/* ---------- Sincronização com a conta do Claude (só na versão publicada) ---------- */
+let cloud = null, cloudTimer = null, cloudBusy = false, cloudDirty = false;
+function scheduleCloud() {
+  if (!cloud) return;
+  clearTimeout(cloudTimer);
+  cloudTimer = setTimeout(pushCloud, 1500);
+}
+async function pushCloud() {
+  if (!cloud) return;
+  if (cloudBusy) { cloudDirty = true; return; }
+  cloudBusy = true;
+  try { await cloud.set({ state: JSON.stringify(S), savedAt: S.savedAt || Date.now() }); }
+  catch (e) {
+    if (e && e.code === "quota_exceeded") toast("Espaço da conta cheio: o progresso ficou só neste aparelho.");
+  }
+  cloudBusy = false;
+  if (cloudDirty) { cloudDirty = false; pushCloud(); }
+}
+async function pullCloud() {
+  if (!cloud) return;
+  try {
+    const snap = await cloud.get();
+    if (!snap.exists) return pushCloud();
+    const d = snap.data();
+    if ((d.savedAt || 0) > (S.savedAt || 0)) {
+      S = Object.assign(defaultState(), JSON.parse(d.state));
+      try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {}
+      queue = [];
+      render();
+    } else if ((d.savedAt || 0) < (S.savedAt || 0)) pushCloud();
+  } catch (e) { /* sem conexão: continua com o que está no aparelho */ }
+}
+async function initCloud() {
+  if (!window.claude || !window.claude.use) return;
+  try {
+    const [db, user] = await Promise.all([claude.use("db"), claude.use("user")]);
+    if (!db || !user) return;
+    const id = await user.id();
+    if (!id) return;
+    cloud = db.doc("data/users/" + id + "/progress");
+    await pullCloud();
+    render();
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) pullCloud(); });
+  } catch (e) { cloud = null; }
+}
+
+// Confirmação na própria página (o link do Claude não mostra janelas de confirmação).
+function confirmClick(btn, label, onYes) {
+  if (btn.dataset.armed) { onYes(); return; }
+  const original = btn.textContent;
+  btn.dataset.armed = "1";
+  btn.textContent = label;
+  setTimeout(() => { if (btn.isConnected) { delete btn.dataset.armed; btn.textContent = original; } }, 4000);
+}
+
+/* ---------- Utilidades ---------- */
+function pad(n) { return String(n).padStart(2, "0"); }
+function todayKey(d = new Date()) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+function startOfToday() { const d = new Date(); d.setHours(0, 0, 0, 0); return d.getTime(); }
+function esc(s) { return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+function $(sel) { return document.querySelector(sel); }
+function todayLog() {
+  const k = todayKey();
+  if (!S.log[k]) S.log[k] = { blocks: {}, minutes: 0 };
+  return S.log[k];
+}
+function weekData(n = S.week) { return WEEKS[n - 1]; }
+function phaseOf(n) { return PHASES.find((p) => n >= p.weeks[0] && n <= p.weeks[1]); }
+function expectedWeek() {
+  const days = Math.floor((startOfToday() - new Date(S.startDate + "T00:00:00").getTime()) / DAY);
+  return Math.min(24, Math.max(1, Math.floor(days / 7) + 1));
+}
+let toastTimer;
+function toast(msg) {
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+/* ---------- Voz: ouvir (TTS), reconhecer (STT), gravar ---------- */
+let esVoice = null;
+function pickVoice() {
+  const voices = speechSynthesis.getVoices();
+  const es = voices.filter((v) => v.lang && v.lang.toLowerCase().startsWith("es"));
+  const spain = es.filter((v) => v.lang.toLowerCase() === "es-es");
+  const pool = spain.length ? spain : es;
+  esVoice = pool.find((v) => /natural|online|neural/i.test(v.name)) || pool[0] || null;
+}
+if ("speechSynthesis" in window) {
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
+function speak(text, rate = 1) {
+  if (!("speechSynthesis" in window)) return toast("Este navegador não tem voz. Use o Chrome ou o Edge.");
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "es-ES";
+  if (esVoice) u.voice = esVoice;
+  u.rate = rate;
+  speechSynthesis.speak(u);
+}
+
+const SR = EMBED ? null : (window.SpeechRecognition || window.webkitSpeechRecognition);
+const CAN_MIC = !!SR;
+const CAN_REC = !EMBED && !!(navigator.mediaDevices && window.MediaRecorder);
+let activeRec = null;
+
+// Campo para responder digitando ou ditando com o microfone do teclado.
+function typedHTML(id) {
+  return `<div class="typed">
+    <input type="text" id="${id}" autocomplete="off" autocapitalize="sentences" lang="es"
+      placeholder="${CAN_MIC ? "Ou digite sua resposta aqui" : "Toque aqui e dite com o 🎤 do teclado"}">
+    <button class="btn" id="${id}Go">Conferir</button>
+  </div>`;
+}
+function bindTyped(id, target, onResult) {
+  const inp = $("#" + id), go = $("#" + id + "Go");
+  if (!inp) return;
+  const run = () => { if (inp.value.trim()) onResult(bestCompare(target, [inp.value])); };
+  go.onclick = run;
+  inp.onkeydown = (e) => { if (e.key === "Enter") { e.preventDefault(); run(); } };
+}
+function recordHTML(btnId, audioId, label = "⏺ Gravar") {
+  if (CAN_REC) return `<button class="btn" id="${btnId}">${label}</button><audio id="${audioId}" controls hidden></audio>`;
+  return `<span class="small">Para se ouvir, grave com o gravador de voz do celular.</span>`;
+}
+function bindRecord(btnId, audioId) {
+  const b = $("#" + btnId);
+  if (b) b.onclick = () => toggleRecord(b, $("#" + audioId));
+}
+function listen(onText, onEnd) {
+  if (!SR) { toast("Reconhecimento de voz só funciona no Chrome ou Edge."); onEnd && onEnd(); return; }
+  if (activeRec) { activeRec.stop(); return; }
+  const r = new SR();
+  r.lang = "es-ES";
+  r.interimResults = false;
+  r.maxAlternatives = 3;
+  r.onresult = (e) => {
+    const alts = Array.from(e.results[0]).map((a) => a.transcript);
+    onText(alts);
+  };
+  r.onerror = (e) => {
+    if (e.error === "not-allowed") toast("Permita o uso do microfone no navegador.");
+    else if (e.error === "no-speech") toast("Não ouvi nada. Tente de novo, mais perto do microfone.");
+    else toast("Erro no microfone: " + e.error);
+  };
+  r.onend = () => { activeRec = null; onEnd && onEnd(); };
+  activeRec = r;
+  r.start();
+}
+
+// Compara palavra por palavra (sem acentos/pontuação) e devolve nota + HTML destacado.
+function norm(s) {
+  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-zñ0-9\s]/g, " ").split(/\s+/).filter(Boolean);
+}
+function compare(target, said) {
+  const a = norm(target), b = norm(said);
+  // LCS para descobrir quais palavras do alvo apareceram, na ordem.
+  const dp = Array.from({ length: a.length + 1 }, () => new Array(b.length + 1).fill(0));
+  for (let i = a.length - 1; i >= 0; i--)
+    for (let j = b.length - 1; j >= 0; j--)
+      dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+  const hit = new Set();
+  let i = 0, j = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) { hit.add(i); i++; j++; }
+    else if (dp[i + 1][j] >= dp[i][j + 1]) i++;
+    else j++;
+  }
+  const score = Math.round((hit.size / Math.max(a.length, b.length, 1)) * 100);
+  const html = a.map((w, k) => `<span class="${hit.has(k) ? "w-ok" : "w-miss"}">${esc(w)}</span>`).join(" ");
+  return { score, html };
+}
+function bestCompare(target, alts) {
+  return alts.map((t) => ({ t, ...compare(target, t) })).sort((x, y) => y.score - x.score)[0];
+}
+
+// Gravação da própria voz para comparar com o áudio.
+let mediaRec = null;
+async function toggleRecord(btn, audioEl) {
+  if (mediaRec && mediaRec.state === "recording") { mediaRec.stop(); return; }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const chunks = [];
+    mediaRec = new MediaRecorder(stream);
+    mediaRec.ondataavailable = (e) => chunks.push(e.data);
+    mediaRec.onstop = () => {
+      stream.getTracks().forEach((t) => t.stop());
+      audioEl.src = URL.createObjectURL(new Blob(chunks, { type: mediaRec.mimeType }));
+      audioEl.hidden = false;
+      btn.classList.remove("rec");
+      btn.textContent = "⏺ Gravar";
+      audioEl.play();
+    };
+    mediaRec.start();
+    btn.classList.add("rec");
+    btn.textContent = "⏹ Parar";
+  } catch (e) {
+    toast("Não consegui acessar o microfone.");
+  }
+}
+
+/* ---------- Repetição espaçada ---------- */
+function unlockedCards() { return CARDS.filter((c) => c.w <= S.week); }
+function newSeenToday() { return S.newCount[todayKey()] || 0; }
+function buildQueue() {
+  const now = Date.now();
+  const due = [], fresh = [];
+  for (const c of unlockedCards()) {
+    const st = S.cards[c.id];
+    if (!st) fresh.push(c);
+    else if (st.due <= now) due.push(c);
+  }
+  due.sort((x, y) => S.cards[x.id].due - S.cards[y.id].due);
+  const room = Math.max(0, S.newPerDay - newSeenToday());
+  return due.concat(fresh.slice(0, room));
+}
+function previewIvl(c, g) {
+  const st = S.cards[c.id] || { ivl: 0, ease: 2.5, reps: 0 };
+  if (g === 1) return 0;
+  if (g === 2) return Math.max(1, Math.round(st.ivl * 1.2));
+  if (g === 3) return st.reps === 0 ? 1 : st.reps === 1 ? 3 : Math.round(st.ivl * st.ease);
+  return st.reps === 0 ? 4 : Math.round(Math.max(st.ivl, 1) * st.ease * 1.3);
+}
+function grade(c, g) {
+  const isNew = !S.cards[c.id];
+  const st = S.cards[c.id] || { due: 0, ivl: 0, ease: 2.5, reps: 0, lapses: 0 };
+  if (isNew) S.newCount[todayKey()] = newSeenToday() + 1;
+  const ivl = previewIvl(c, g);
+  if (g === 1) {
+    st.lapses++; st.reps = 0; st.ivl = 0;
+    st.ease = Math.max(1.3, st.ease - 0.2);
+    st.due = Date.now() + 60 * 1000;   // volta ainda hoje
+  } else {
+    if (g === 2) st.ease = Math.max(1.3, st.ease - 0.15);
+    if (g === 4) st.ease += 0.15;
+    st.ivl = ivl; st.reps++;
+    st.due = startOfToday() + ivl * DAY + 4 * 3600 * 1000;
+  }
+  S.cards[c.id] = st;
+  save();
+  return g === 1;   // true = recolocar na fila
+}
+function fmtIvl(d) { return d === 0 ? "agora" : d === 1 ? "1 dia" : d < 30 ? d + " dias" : Math.round(d / 30) + " mês"; }
+
+/* ---------- Timer de bloco ---------- */
+let timer = null;
+let T = { block: null, total: 0, left: 0, running: false };   // sobrevive aos redesenhos da tela
+function fmtClock(s) { return (s < 0 ? "+" : "") + pad(Math.floor(Math.abs(s) / 60)) + ":" + pad(Math.abs(s) % 60); }
+function timerHTML(blockId, minutes) {
+  const done = todayLog().blocks[blockId];
+  if (T.block !== blockId) T = { block: blockId, total: minutes * 60, left: minutes * 60, running: false };
+  const label = T.running ? "⏸ Pausar" : T.left === T.total ? "▶ Iniciar" : "▶ Continuar";
+  return `<div class="timer" id="timer" data-block="${blockId}" data-min="${minutes}">
+    <span class="clock" id="clock">${fmtClock(T.left)}</span>
+    <button class="btn" id="tStart">${label}</button>
+    <span class="spacer"></span>
+    <button class="btn ${done ? "" : "ok"}" id="tDone">${done ? "✓ Bloco feito hoje" : "Concluir bloco"}</button>
+  </div>`;
+}
+function bindTimer() {
+  const box = $("#timer");
+  if (!box) return;
+  const block = box.dataset.block;
+  const btn = $("#tStart");
+  const tick = () => {
+    T.left--;
+    const clock = $("#clock");
+    if (clock) clock.textContent = fmtClock(T.left);
+    if (T.left === 0) { toast("Tempo do bloco concluído! 🎉"); speak("¡Muy bien! Tiempo terminado."); }
+  };
+  clearInterval(timer);
+  if (T.running) timer = setInterval(tick, 1000);
+  btn.onclick = () => {
+    T.running = !T.running;
+    btn.textContent = T.running ? "⏸ Pausar" : "▶ Continuar";
+    clearInterval(timer);
+    if (T.running) timer = setInterval(tick, 1000);
+  };
+  $("#tDone").onclick = () => {
+    const lg = todayLog();
+    if (lg.blocks[block]) return;
+    const used = Math.round((T.total - T.left) / 60);
+    lg.blocks[block] = true;
+    lg.minutes += used > 0 ? used : Number(box.dataset.min);
+    save();
+    clearInterval(timer);
+    T = { block: null, total: 0, left: 0, running: false };
+    toast("Bloco concluído ✓");
+    location.hash = "#hoje";
+  };
+}
+
+/* ---------- Telas ---------- */
+const BLOCKS = [
+  { id: "revisar", icon: "🗂️", title: "Cartões falando", min: 15, desc: "Veja o português e FALE em espanhol antes de ver a resposta." },
+  { id: "licao", icon: "📘", title: "Lição + desafio da semana", min: 10, desc: "A regra que mais causa portunhol nesta semana." },
+  { id: "falar", icon: "🎙️", title: "Shadowing e gravação", min: 20, desc: "Repita junto com o áudio, grave e compare." },
+  { id: "ouvir", icon: "🎧", title: "Ouvir espanhol da Espanha", min: 30, desc: "Input compreensível: conteúdo real, no seu nível." },
+  { id: "escrever", icon: "✍️", title: "Escrever e corrigir", min: 15, desc: "Escreva sobre o tema e peça correção ao Claude." },
+];
+
+function ring(pct) {
+  const r = 36, c = 2 * Math.PI * r;
+  return `<svg class="ring" viewBox="0 0 84 84"><circle class="bg" cx="42" cy="42" r="${r}"/>
+    <circle class="fg" cx="42" cy="42" r="${r}" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - pct)}" transform="rotate(-90 42 42)"/>
+    <text x="42" y="49" text-anchor="middle">${Math.round(pct * 100)}%</text></svg>`;
+}
+
+function viewHoje() {
+  const w = weekData(), lg = todayLog();
+  const doneN = BLOCKS.filter((b) => lg.blocks[b.id]).length;
+  const exp = expectedWeek();
+  const behind = exp - S.week;
+  return `
+  <div class="card hero">
+    <div>
+      <div class="small">Semana ${S.week} de 24 · Fase ${phaseOf(S.week).n}: ${phaseOf(S.week).name}</div>
+      <h1>${esc(w.title)}</h1>
+      <div class="small">${doneN === BLOCKS.length ? "Sessão de hoje completa. ¡Enhorabuena! 🎉" : `${doneN} de ${BLOCKS.length} blocos feitos hoje · ${lg.minutes} min estudados`}</div>
+    </div>
+    ${ring(doneN / BLOCKS.length)}
+  </div>
+  ${behind > 1 ? `<div class="card warnbox small">Pelo calendário você estaria na semana ${exp}. Tudo bem ir no seu ritmo, mas tente não pular dias.</div>` : ""}
+  <h2>Sua sessão de hoje (1h30)</h2>
+  ${BLOCKS.map((b) => `
+    <a class="card block ${lg.blocks[b.id] ? "done" : ""}" href="#${b.id}">
+      <div class="icon">${b.icon}</div>
+      <div class="info"><h3>${b.title}</h3><div class="small">${b.desc}</div></div>
+      <div class="min">${b.min} min</div>
+    </a>`).join("")}
+  <p class="small">Faça na ordem. Se o dia estiver corrido, priorize <b>Cartões</b> e <b>Shadowing</b>: são eles que destravam a fala.</p>`;
+}
+
+/* Cartões */
+let queue = [], qIndex = 0, revealed = false, heard = null;
+function startReview() { queue = buildQueue(); qIndex = 0; revealed = false; heard = null; }
+function viewRevisar() {
+  if (!queue.length || qIndex >= queue.length) startReview();
+  const head = timerHTML("revisar", 15) + `<h1>Cartões falando</h1>
+    <p class="sub">Leia o português, <b>fale a frase em espanhol em voz alta</b> (ou use o 🎤), depois vire o cartão e seja honesta na nota.</p>`;
+  if (!queue.length) {
+    return head + `<div class="card empty"><div class="big">✅</div><h3>Nada para revisar agora</h3>
+      <p class="small">Você já viu os ${S.newPerDay} cartões novos de hoje e não há revisões pendentes. Volte amanhã ou passe para o Shadowing.</p>
+      <a class="btn primary" href="#falar">Ir para Shadowing</a></div>`;
+  }
+  const c = queue[qIndex], isNew = !S.cards[c.id];
+  const left = queue.length - qIndex;
+  return head + `
+  <div class="row small" style="margin-bottom:8px"><span>${left} cartão(ões) na fila</span><span class="spacer"></span><span>Semana ${c.w}</span></div>
+  <div class="card flash">
+    ${isNew ? '<span class="tag new">NOVO</span>' : '<span class="tag">REVISÃO</span>'}
+    <div class="pt">${esc(c.pt)}</div>
+    ${revealed ? "" : typedHTML("typed")}
+    <div class="row" style="justify-content:center">
+      ${CAN_MIC ? '<button class="btn" id="mic">🎤 Falar</button>' : ""}
+      ${revealed ? "" : '<button class="btn primary" id="reveal">Mostrar resposta</button>'}
+    </div>
+    ${heard ? `<div class="heard">Sua resposta: <i>"${esc(heard.t)}"</i>${revealed ? `<br>Acerto: <span class="score">${heard.score}%</span> · ${heard.html}` : ""}</div>` : ""}
+    ${revealed ? `
+      <div class="es">${esc(c.es)}</div>
+      <div class="row" style="justify-content:center;margin:6px 0">
+        <button class="btn ghost" id="play">🔊 Ouvir</button>
+        <button class="btn ghost" id="slow">🐢 Devagar</button>
+      </div>
+      ${c.note ? `<div class="note">💡 ${esc(c.note)}</div>` : ""}
+      <div class="grades">
+        ${[[1, "Errei"], [2, "Difícil"], [3, "Bom"], [4, "Fácil"]].map(([g, l]) =>
+          `<button class="btn g${g}" data-g="${g}">${l}<small>${fmtIvl(previewIvl(c, g))}</small></button>`).join("")}
+      </div>` : ""}
+  </div>
+  <p class="small">${CAN_MIC ? "Atalhos: <b>Espaço</b> mostra a resposta · <b>1–4</b> dão a nota · <b>M</b> liga o microfone."
+    : "No celular: toque no campo, aperte o 🎤 do teclado e <b>fale a frase em espanhol</b>. Deixe o idioma do teclado em Español (España) para ele entender."}</p>`;
+}
+function bindRevisar() {
+  bindTimer();
+  if (!queue.length || qIndex >= queue.length) return;
+  const c = queue[qIndex];
+  const mic = $("#mic");
+  if (mic) mic.onclick = () => {
+    mic.classList.add("rec"); mic.textContent = "🎤 Ouvindo...";
+    listen((alts) => { heard = bestCompare(c.es, alts); render(); },
+      () => { mic.classList.remove("rec"); mic.textContent = "🎤 Falar"; });
+  };
+  // Ao conferir o que foi digitado/ditado, o cartão já vira.
+  bindTyped("typed", c.es, (r) => { heard = r; revealed = true; render(); speak(c.es); });
+  const rv = $("#reveal");
+  if (rv) rv.onclick = () => { revealed = true; render(); speak(c.es); };
+  if (revealed) {
+    $("#play").onclick = () => speak(c.es);
+    $("#slow").onclick = () => speak(c.es, 0.7);
+    document.querySelectorAll("[data-g]").forEach((b) => b.onclick = () => answer(Number(b.dataset.g)));
+  }
+}
+function answer(g) {
+  const c = queue[qIndex];
+  if (grade(c, g)) queue.push(c);
+  qIndex++; revealed = false; heard = null;
+  if (qIndex >= queue.length) { queue = []; toast("Fila terminada! 🎉"); }
+  render();
+}
+document.addEventListener("keydown", (e) => {
+  if (route() !== "revisar" || /input|textarea/i.test(e.target.tagName)) return;
+  if (e.code === "Space" && !revealed && $("#reveal")) { e.preventDefault(); $("#reveal").click(); }
+  else if (revealed && ["1", "2", "3", "4"].includes(e.key)) answer(Number(e.key));
+  else if (e.key.toLowerCase() === "m" && $("#mic")) $("#mic").click();
+});
+
+/* Lição */
+let lessonWeek = null;
+function viewLicao() {
+  const n = lessonWeek || S.week;
+  const w = weekData(n);
+  const isCurrent = n === S.week;
+  return (isCurrent ? timerHTML("licao", 10) : "") + `
+  <div class="small">Semana ${n} · Fase ${phaseOf(n).n}: ${phaseOf(n).name}</div>
+  <h1>${esc(w.title)}</h1>
+  <div class="card lesson" style="margin-top:14px">${w.lesson}</div>
+  <div class="card challenge">
+    <h3>🎯 Desafio de fala da semana</h3>
+    <p>${esc(w.speak)}</p>
+    <div class="row">${recordHTML("recBtn", "recAudio")}</div>
+    <p class="small">A gravação não fica salva. Ouça, perceba o que soou como português e grave de novo.</p>
+  </div>
+  <div class="card">
+    <h3>Frases desta semana</h3>
+    ${CARDS.filter((c) => c.w === n).map((c) => `
+      <div class="row" style="padding:6px 0;border-bottom:1px solid var(--border)">
+        <button class="btn ghost" data-say="${esc(c.es)}" title="Ouvir">🔊</button>
+        <div style="flex:1"><b>${esc(c.es)}</b><div class="small">${esc(c.pt)}</div></div>
+      </div>`).join("") || '<p class="small">Semana de revisão: sem frases novas.</p>'}
+  </div>
+  ${!isCurrent ? `<a class="btn" href="#trilha">← Voltar à trilha</a>` : ""}`;
+}
+function bindLicao() {
+  bindTimer();
+  bindRecord("recBtn", "recAudio");
+  document.querySelectorAll("[data-say]").forEach((b) => b.onclick = () => speak(b.dataset.say));
+}
+
+/* Falar (shadowing) */
+let shadowIdx = 0;
+function shadowList() {
+  // Frases da semana atual + da anterior, para reforçar.
+  return CARDS.filter((c) => c.w === S.week || c.w === S.week - 1);
+}
+function viewFalar() {
+  const list = shadowList();
+  if (shadowIdx >= list.length) shadowIdx = 0;
+  const c = list[shadowIdx];
+  return timerHTML("falar", 20) + `
+  <h1>Shadowing</h1>
+  <p class="sub">Técnica: ouça → repita <b>junto</b> com o áudio, imitando ritmo e entonação → grave sozinha → compare. Repita cada frase umas 5 vezes.</p>
+  ${c ? `
+  <div class="card phrase">
+    <div class="row small"><span>Frase ${shadowIdx + 1} de ${list.length}</span><span class="spacer"></span><span>Semana ${c.w}</span></div>
+    <div class="es-big">${esc(c.es)}</div>
+    <div class="pt-small">${esc(c.pt)}</div>
+    ${c.note ? `<div class="small">💡 ${esc(c.note)}</div>` : ""}
+    <div class="row" style="margin-top:8px">
+      <button class="btn primary" id="sPlay">🔊 Ouvir</button>
+      <button class="btn" id="sSlow">🐢 Devagar</button>
+      ${CAN_MIC ? '<button class="btn" id="sMic">🎤 Testar pronúncia</button>' : ""}
+      ${recordHTML("sRec", "sAudio")}
+    </div>
+    ${CAN_MIC ? "" : typedHTML("sTyped")}
+    <div id="sResult"></div>
+    <div class="row end" style="margin-top:8px">
+      <button class="btn ghost" id="sPrev">← Anterior</button>
+      <button class="btn" id="sNext">Próxima →</button>
+    </div>
+  </div>` : `<div class="card empty"><p>Sem frases nesta semana. Use o desafio de fala da lição.</p></div>`}
+  <div class="card small">
+    <b>Dica:</b> ${CAN_MIC ? "o \"Testar pronúncia\" usa o reconhecimento de voz do navegador" : "dite a frase com o 🎤 do teclado (em Español). O ditado do celular"}. Se ele entendeu sua frase, um espanhol também entenderia. Palavras em vermelho são as que ele não reconheceu: repita só essas.
+  </div>`;
+}
+function bindFalar() {
+  bindTimer();
+  const list = shadowList(), c = list[shadowIdx];
+  if (!c) return;
+  $("#sPlay").onclick = () => speak(c.es);
+  $("#sSlow").onclick = () => speak(c.es, 0.7);
+  bindRecord("sRec", "sAudio");
+  const show = (r) => {
+    $("#sResult").innerHTML = `<div class="heard">Entendido: <i>"${esc(r.t)}"</i><br>Acerto: <span class="score">${r.score}%</span> · ${r.html}</div>`;
+  };
+  const mic = $("#sMic");
+  if (mic) mic.onclick = () => {
+    mic.classList.add("rec"); mic.textContent = "🎤 Ouvindo...";
+    listen((alts) => show(bestCompare(c.es, alts)),
+      () => { mic.classList.remove("rec"); mic.textContent = "🎤 Testar pronúncia"; });
+  };
+  bindTyped("sTyped", c.es, show);
+  $("#sNext").onclick = () => { shadowIdx = (shadowIdx + 1) % list.length; render(); };
+  $("#sPrev").onclick = () => { shadowIdx = (shadowIdx - 1 + list.length) % list.length; render(); };
+}
+
+/* Ouvir */
+function viewOuvir() {
+  const p = phaseOf(S.week);
+  return timerHTML("ouvir", 30) + `
+  <h1>Ouvir espanhol da Espanha</h1>
+  <p class="sub">Escolha um dos recursos abaixo e assista ou ouça por 30 minutos. Regras: <b>sem legenda em português</b>, conteúdo que você entende pelo menos 70%, e no final <b>resuma em voz alta</b> o que entendeu (1 minuto).</p>
+  ${INPUT[p.n].map((r) => `
+    <a class="card res" href="${r.url}" target="_blank" rel="noopener">
+      <b>${esc(r.name)} ↗</b>
+      <div class="small">${esc(r.tip)}</div>
+    </a>`).join("")}
+  <div class="card challenge">
+    <h3>Depois de ouvir: resumo falado</h3>
+    <p class="small">Grave 1 minuto contando o que você ouviu. É aqui que o input vira fala.</p>
+    <div class="row">${recordHTML("oRec", "oAudio", "⏺ Gravar resumo")}</div>
+  </div>`;
+}
+function bindOuvir() {
+  bindTimer();
+  bindRecord("oRec", "oAudio");
+}
+
+/* Escrever */
+function currentPrompt() {
+  const w = weekData();
+  const day = Math.floor(startOfToday() / DAY);
+  return w.write[day % w.write.length];
+}
+function viewEscrever() {
+  const w = weekData(), prompt = currentPrompt();
+  const draft = (() => { try { return localStorage.getItem(KEY + "-draft") || ""; } catch (e) { return ""; } })();
+  const mine = S.journal.slice().reverse().slice(0, 5);
+  return timerHTML("escrever", 15) + `
+  <h1>Escrever e corrigir</h1>
+  <p class="sub">Escreva sem tradutor. Errar aqui é o objetivo: é assim que você descobre o seu portunhol.</p>
+  <div class="card">
+    <div class="small">Tema de hoje · semana ${S.week}</div>
+    <h3>${esc(prompt)}</h3>
+    <textarea id="txt" placeholder="Escribe aquí en español...">${esc(draft)}</textarea>
+    <div class="row" style="margin-top:10px">
+      <button class="btn primary" id="copy">📋 Copiar para corrigir com o Claude</button>
+      <button class="btn" id="saveTxt">💾 Salvar no diário</button>
+      <button class="btn ghost" id="readTxt">🔊 Ler meu texto</button>
+    </div>
+    <p class="small">Copie, cole numa conversa com o Claude e depois <b>leia em voz alta a versão corrigida</b> 3 vezes.</p>
+  </div>
+  ${mine.length ? `<h2>Últimos textos</h2>` + mine.map((j) => `
+    <div class="card"><div class="small">${j.date} · semana ${j.week} · ${esc(j.prompt)}</div>
+    <p style="white-space:pre-wrap;margin:8px 0 0">${esc(j.text)}</p></div>`).join("") : ""}`;
+}
+function bindEscrever() {
+  bindTimer();
+  const txt = $("#txt");
+  txt.oninput = () => { try { localStorage.setItem(KEY + "-draft", txt.value); } catch (e) {} };
+  $("#copy").onclick = async () => {
+    if (!txt.value.trim()) return toast("Escreva algo primeiro.");
+    const w = weekData();
+    const msg = `Sou brasileira e estou aprendendo espanhol da Espanha para trabalhar como editora de vídeo lá. Estou na semana ${S.week} de 24 (tema: "${w.title}").
+Corrija o meu texto abaixo:
+1) Mostre a versão corrigida, natural, como um espanhol diria.
+2) Liste cada erro com uma explicação curta, marcando os que são "portunhol" (influência do português).
+3) Me dê 3 frases novas parecidas para eu praticar falando.
+
+Tema: ${currentPrompt()}
+Meu texto:
+${txt.value.trim()}`;
+    try { await navigator.clipboard.writeText(msg); toast("Copiado! Cole numa conversa com o Claude."); }
+    catch (e) { txt.select(); toast("Não consegui copiar automaticamente. Use Ctrl+C."); }
+  };
+  $("#saveTxt").onclick = () => {
+    if (!txt.value.trim()) return toast("Escreva algo primeiro.");
+    S.journal.push({ date: todayKey(), week: S.week, prompt: currentPrompt(), text: txt.value.trim() });
+    save();
+    try { localStorage.removeItem(KEY + "-draft"); } catch (e) {}
+    toast("Salvo no diário ✓");
+    render();
+  };
+  $("#readTxt").onclick = () => txt.value.trim() && speak(txt.value);
+}
+
+/* Trilha */
+function viewTrilha() {
+  return `<h1>Trilha de 6 meses</h1>
+  <p class="sub">24 semanas, uma por vez. Avance quando a semana estiver confortável (o ideal é 7 dias em cada).</p>
+  <div class="card">
+    <div class="row"><b>Semana ${S.week}: ${esc(weekData().title)}</b><span class="spacer"></span>
+      ${S.week < 24 ? `<button class="btn primary" id="nextWeek">Concluir semana e avançar →</button>` : `<span class="tag new">Última semana!</span>`}</div>
+    <div class="small" style="margin-top:6px">Ao avançar, as frases da próxima semana entram nos seus cartões.</div>
+  </div>
+  ${PHASES.map((p) => `
+    <div class="phase-title"><h2 style="margin:0">Fase ${p.n}: ${p.name}</h2><span>sem. ${p.weeks[0]}–${p.weeks[1]}</span></div>
+    ${WEEKS.filter((w) => w.n >= p.weeks[0] && w.n <= p.weeks[1]).map((w) => {
+      const cls = w.n === S.week ? "current" : w.n < S.week ? "done" : "locked";
+      return `<div class="card week ${cls}" data-week="${w.n}">
+        <div class="num">${w.n < S.week ? "✓" : w.n}</div>
+        <div style="flex:1"><b>${esc(w.title)}</b><div class="small">${CARDS.filter((c) => c.w === w.n).length} frases</div></div>
+        <span class="small">${w.n <= S.week ? "Ver lição →" : "🔒 prévia"}</span>
+      </div>`;
+    }).join("")}`).join("")}`;
+}
+function bindTrilha() {
+  const nb = $("#nextWeek");
+  if (nb) nb.onclick = () => confirmClick(nb, `Toque de novo para ir à semana ${S.week + 1}`, () => {
+    S.weeksDone[S.week] = todayKey();
+    S.week++;
+    save();
+    toast(`Semana ${S.week} liberada! 🎉`);
+    render();
+  });
+  document.querySelectorAll("[data-week]").forEach((el) => el.onclick = () => {
+    lessonWeek = Number(el.dataset.week);
+    location.hash = "#licao";
+  });
+}
+
+/* Progresso */
+function streak() {
+  let n = 0;
+  const d = new Date();
+  if (!(S.log[todayKey(d)] && S.log[todayKey(d)].minutes > 0)) d.setDate(d.getDate() - 1);
+  while (S.log[todayKey(d)] && S.log[todayKey(d)].minutes > 0) { n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+function viewProgresso() {
+  const logs = Object.values(S.log);
+  const minutes = logs.reduce((a, l) => a + (l.minutes || 0), 0);
+  const days = logs.filter((l) => l.minutes > 0).length;
+  const seen = Object.keys(S.cards).length;
+  const mastered = Object.values(S.cards).filter((c) => c.ivl >= 21).length;
+  const listenMin = logs.filter((l) => l.blocks && l.blocks.ouvir).length * 30;
+  const cells = [];
+  for (let i = 27; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const m = (S.log[todayKey(d)] || {}).minutes || 0;
+    cells.push(`<div class="${m >= 75 ? "l3" : m >= 30 ? "l2" : m > 0 ? "l1" : ""}" title="${todayKey(d)}: ${m} min"></div>`);
+  }
+  return `<h1>Seu progresso</h1>
+  <p class="sub">Começou em ${new Date(S.startDate + "T00:00:00").toLocaleDateString("pt-BR")}.</p>
+  <div class="card">
+    <div class="row small"><span>Trilha: semana ${S.week} de 24</span><span class="spacer"></span><span>${Math.round((S.week - 1) / 24 * 100)}%</span></div>
+    <div class="bar" style="margin-top:6px"><div style="width:${(S.week - 1) / 24 * 100}%"></div></div>
+  </div>
+  <div class="stats">
+    <div class="card stat"><div class="v">${streak()} 🔥</div><div class="l">dias seguidos</div></div>
+    <div class="card stat"><div class="v">${(minutes / 60).toFixed(1)}h</div><div class="l">de estudo total</div></div>
+    <div class="card stat"><div class="v">${days}</div><div class="l">dias estudados</div></div>
+    <div class="card stat"><div class="v">${(listenMin / 60).toFixed(1)}h</div><div class="l">ouvindo espanhol</div></div>
+    <div class="card stat"><div class="v">${seen}</div><div class="l">frases praticadas</div></div>
+    <div class="card stat"><div class="v">${mastered}</div><div class="l">frases dominadas</div></div>
+  </div>
+  <h2>Últimas 4 semanas</h2>
+  <div class="card"><div class="heat">${cells.join("")}</div>
+  <div class="small" style="margin-top:8px">Cada quadrado é um dia. Verde mais escuro = mais minutos.</div></div>
+  <h2>Diário de textos</h2>
+  <div class="card small">${S.journal.length} texto(s) escritos. Veja e escreva novos em <a href="#escrever">Escrever</a>.</div>`;
+}
+
+/* Configurações */
+function viewConfig() {
+  return `<h1>Configurações</h1>
+  <div class="card">
+    <label>Data de início</label><input type="date" id="cStart" value="${S.startDate}">
+    <div style="height:12px"></div>
+    <label>Cartões novos por dia</label><input type="number" id="cNew" min="3" max="30" value="${S.newPerDay}">
+    <div style="height:12px"></div>
+    <label>Semana atual</label>
+    <select id="cWeek">${WEEKS.map((w) => `<option value="${w.n}" ${w.n === S.week ? "selected" : ""}>Semana ${w.n}: ${esc(w.title)}</option>`).join("")}</select>
+    <div class="row end" style="margin-top:14px"><button class="btn primary" id="cSave">Salvar</button></div>
+  </div>
+  <div class="card">
+    <h3>Voz</h3>
+    <p class="small">Voz em uso: <b>${esVoice ? esc(esVoice.name) : "nenhuma voz em espanhol encontrada"}</b>.
+    ${esVoice && !/es-es/i.test(esVoice.lang) ? "<br>Essa voz não é da Espanha. Instale uma voz 'Español (España)' nas configurações de Fala do Windows." : ""}
+    No Edge, as vozes "Online (Natural)" soam muito mais naturais.</p>
+    <button class="btn" onclick="speak('Hola, ¿qué tal? Vamos a aprender español juntas.')">🔊 Testar voz</button>
+  </div>
+  <div class="card">
+    <h3>Onde fica o seu progresso</h3>
+    <p class="small">${cloud
+      ? "✓ Sincronizado com a sua conta do Claude. Abra este mesmo link no celular ou no computador e continue de onde parou."
+      : EMBED ? "Salvo só neste aparelho (não consegui conectar à sua conta agora)."
+      : "Salvo só neste navegador. Baixe um backup de vez em quando."}</p>
+    <div class="row">
+      ${EMBED ? "" : `<button class="btn" id="cExport">⬇ Baixar backup</button>
+      <label class="btn" style="margin:0">⬆ Restaurar backup<input type="file" id="cImport" accept=".json" hidden></label>`}
+      <span class="spacer"></span>
+      <button class="btn ghost" id="cReset" style="color:var(--accent)">Apagar tudo</button>
+    </div>
+  </div>`;
+}
+function bindConfig() {
+  $("#cSave").onclick = () => {
+    S.startDate = $("#cStart").value || S.startDate;
+    S.newPerDay = Math.min(30, Math.max(3, Number($("#cNew").value) || 10));
+    S.week = Number($("#cWeek").value);
+    save(); toast("Salvo ✓"); render();
+  };
+  if ($("#cExport")) $("#cExport").onclick = () => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(S, null, 2)], { type: "application/json" }));
+    a.download = `espanol-backup-${todayKey()}.json`;
+    a.click();
+  };
+  if ($("#cImport")) $("#cImport").onchange = (e) => {
+    const f = e.target.files[0];
+    if (!f) return;
+    f.text().then((t) => {
+      try { S = Object.assign(defaultState(), JSON.parse(t)); save(); toast("Backup restaurado ✓"); render(); }
+      catch (err) { toast("Arquivo inválido."); }
+    });
+  };
+  const rs = $("#cReset");
+  rs.onclick = () => confirmClick(rs, "Toque de novo para apagar TUDO", () => {
+    S = defaultState(); save(); toast("Progresso apagado."); location.hash = "#hoje"; render();
+  });
+}
+
+/* ---------- Roteador ---------- */
+const VIEWS = {
+  hoje: [viewHoje, () => {}],
+  revisar: [viewRevisar, bindRevisar],
+  licao: [viewLicao, bindLicao],
+  falar: [viewFalar, bindFalar],
+  ouvir: [viewOuvir, bindOuvir],
+  escrever: [viewEscrever, bindEscrever],
+  trilha: [viewTrilha, bindTrilha],
+  progresso: [viewProgresso, () => {}],
+  config: [viewConfig, bindConfig],
+};
+function route() { const r = location.hash.slice(1); return VIEWS[r] ? r : "hoje"; }
+function render() {
+  const r = route();
+  const [view, bind] = VIEWS[r];
+  $("#app").innerHTML = view();
+  bind();
+  document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + r));
+}
+let lastRoute = null;
+window.addEventListener("hashchange", () => {
+  const r = route();
+  if (r !== lastRoute) {
+    clearInterval(timer);
+    T.running = false;
+    if (activeRec) activeRec.stop();
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    if (r !== "licao") lessonWeek = null;
+    if (r === "revisar") startReview();
+    window.scrollTo(0, 0);
+  }
+  lastRoute = r;
+  render();
+});
+lastRoute = route();
+render();
+initCloud();
+
+</script>
+</body>
+</html>
