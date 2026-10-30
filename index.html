@@ -272,6 +272,7 @@ label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 6px; }
   <main id="app"></main>
   <div id="toast" class="toast"></div>
 
+  <script src="audios.js" async></script>
   <script>
 // Conteúdo do curso: 24 semanas (6 meses), foco em FALAR sem portunhol,
 // espanhol da Espanha e vocabulário de audiovisual / mercado de trabalho.
@@ -1034,7 +1035,20 @@ if ("speechSynthesis" in window) {
   pickVoice();
   speechSynthesis.onvoiceschanged = pickVoice;
 }
+// Toca o áudio gravado (voz neural da Ximena) quando existe;
+// senão, usa a voz do navegador (ex.: para ler os seus textos).
+let player = null;
 function speak(text, rate = 1) {
+  const rec = window.AUDIOS && window.AUDIOS[text];
+  if (player) { player.pause(); player = null; }
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  if (rec) {
+    player = new Audio(rec);
+    player.playbackRate = rate < 1 ? 0.75 : 1;
+    player.preservesPitch = true;
+    player.play().catch(() => toast("Toque de novo para ouvir."));
+    return;
+  }
   if (!("speechSynthesis" in window)) return toast("Este navegador não tem voz. Use o Chrome ou o Edge.");
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
@@ -1072,25 +1086,58 @@ function bindRecord(btnId, audioId) {
   const b = $("#" + btnId);
   if (b) b.onclick = () => toggleRecord(b, $("#" + audioId));
 }
-function listen(onText, onEnd) {
+// Reconhecimento de voz com proteções: mostra o texto enquanto você fala,
+// para sozinho (silêncio ou 10 s) e nunca fica "ouvindo" para sempre.
+let stopListening = null;
+function listen(onText, onEnd, onLive) {
   if (!SR) { toast("Reconhecimento de voz só funciona no Chrome ou Edge."); onEnd && onEnd(); return; }
-  if (activeRec) { activeRec.stop(); return; }
+  if (stopListening) { stopListening(); return; }   // segundo toque = parar
   const r = new SR();
   r.lang = "es-ES";
-  r.interimResults = false;
+  r.interimResults = true;
+  r.continuous = false;
   r.maxAlternatives = 3;
+  let latest = "", alts = [], finished = false, errored = false;
+  const timers = [];
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    timers.forEach(clearTimeout);
+    activeRec = null; stopListening = null;
+    if (alts.length || latest.trim()) onText(alts.length ? alts : [latest]);
+    else if (!errored) toast("Não entendi nada. Fale mais perto do microfone, ou use o campo de digitar/ditar.");
+    onEnd && onEnd();
+  };
   r.onresult = (e) => {
-    const alts = Array.from(e.results[0]).map((a) => a.transcript);
-    onText(alts);
+    let text = "";
+    for (let i = 0; i < e.results.length; i++) text += e.results[i][0].transcript;
+    latest = text;
+    onLive && onLive(text);
+    const last = e.results[e.results.length - 1];
+    if (last.isFinal) {
+      alts = Array.from(last).map((a) => a.transcript);
+      if (e.results.length > 1) alts = [text, ...alts];
+      try { r.stop(); } catch (err) {}
+      setTimeout(finish, 300);
+    }
   };
   r.onerror = (e) => {
-    if (e.error === "not-allowed") toast("Permita o uso do microfone no navegador.");
+    errored = true;
+    if (e.error === "not-allowed" || e.error === "service-not-allowed") toast("O microfone está bloqueado. Libere nas permissões do site (ícone ao lado do endereço).");
     else if (e.error === "no-speech") toast("Não ouvi nada. Tente de novo, mais perto do microfone.");
-    else toast("Erro no microfone: " + e.error);
+    else if (e.error === "network") toast("O reconhecimento de voz precisa de internet.");
+    else if (e.error !== "aborted") toast("Erro no microfone: " + e.error);
+    finish();
   };
-  r.onend = () => { activeRec = null; onEnd && onEnd(); };
+  r.onend = finish;
+  // Parar: pede para o navegador encerrar; se ele não responder em 1,5 s, encerra à força.
+  stopListening = () => {
+    try { r.stop(); } catch (err) {}
+    timers.push(setTimeout(() => { try { r.abort(); } catch (err) {} finish(); }, 1500));
+  };
+  timers.push(setTimeout(() => stopListening && stopListening(), 10000));   // limite de 10 s
   activeRec = r;
-  r.start();
+  try { r.start(); } catch (err) { errored = true; toast("Não consegui ligar o microfone. Tente de novo."); finish(); }
 }
 
 // Compara palavra por palavra (sem acentos/pontuação) e devolve nota + HTML destacado.
